@@ -1,20 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ToDoList.Pages
 {
-    public class IndexModel : PageModel
+    public class ListModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-
-        public IndexModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
-
+        public bool hasData = false;
+        public string taskName = "";
         public void OnGet()
         {
+        }
 
+        public void OnPost()
+        {
+            hasData = true;
+            taskName = Request.Form["taskname"];
         }
     }
 }

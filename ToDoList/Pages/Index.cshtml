@@ -1,10 +1,21 @@
 ﻿@page
-@model IndexModel
+@model ToDoList.Pages.ListModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Hello World!";
+}
+<h1>@ViewData["Title"]</h1>
+
+@if(Model.hasData)
+{
+    <p>* @Model.taskName</p>
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+    <form method="post">
+        <label for="task">Add task</label><br>
+        <input type="text" id="taskn" name="taskname"><br>
+
+        <input type="submit" value="Submit">
+    </form>
 </div>
+
