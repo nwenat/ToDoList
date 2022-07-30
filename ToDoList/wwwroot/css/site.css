@@ -1,3 +1,9 @@
+body {
+    background-color: #1d1e22;
+    color: #CCCCFF;
+}
+
+
 html {
   font-size: 14px;
 }
@@ -13,7 +19,7 @@ html {
   min-height: 100%;
 }
 
-body {
+/*body {
     margin-bottom: 60px;
     background-color: lightslategrey;
-}
+}*/

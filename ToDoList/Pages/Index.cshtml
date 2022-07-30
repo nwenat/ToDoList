@@ -1,12 +1,13 @@
 ﻿@page
 @model ToDoList.Pages.ListModel
 @{
-    ViewData["Title"] = "Hello World!";
+    ViewData["Title"] = "Nozbe 2";
 }
 <h1>@ViewData["Title"]</h1>
 
 @if(Model.hasData)
 {
+    <p>Twój waśnie wpisany task to:</p>
     <p>* @Model.taskName</p>
 }
 
