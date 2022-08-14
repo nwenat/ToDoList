@@ -12,8 +12,7 @@ namespace ToDoList.Models
         public DateTime? When { get; set; }
 
         public Project? Project { get; set; }
-
-        [Required]
+        public ICollection<Category>? Categories { get; set; }
         public bool IsUrgent { get; set; }
     }
 }
