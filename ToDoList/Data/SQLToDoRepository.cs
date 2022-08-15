@@ -11,9 +11,62 @@ namespace ToDoList.Data
             _context = context;
         }
 
-        public IEnumerable<ToDo> GetAllToDo()
+
+        public IEnumerable<ToDo> GetAllTasks()
         {
-            return _context.ToDo;
+            if (_context.ToDo != null)
+            {
+                return _context.ToDo.ToList();
+            }
+            return null;
+        }
+
+
+
+        public IEnumerable<ToDo> GetAllCategories()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<ToDo> GetAllProjects()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public IEnumerable<ToDo> GetCategoryInfo()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<ToDo> GetInbox()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<ToDo> GetOneCategory()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<ToDo> GetOneProject()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<ToDo> GetPriority()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<ToDo> GetProjectInfo()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<ToDo> GetTaskInfo()
+        {
+            throw new NotImplementedException();
         }
     }
 }
