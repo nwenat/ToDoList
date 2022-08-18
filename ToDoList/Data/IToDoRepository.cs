@@ -5,8 +5,8 @@ namespace ToDoList.Data
     public interface IToDoRepository
     {
         IEnumerable<ToDo> GetAllTasks();
-        IEnumerable<ToDo> GetAllProjects();
-        IEnumerable<ToDo> GetAllCategories();
+        IEnumerable<Project> GetAllProjects();
+        IEnumerable<Category> GetAllCategories();
         IEnumerable<ToDo> GetOneCategory();
         IEnumerable<ToDo> GetOneProject();
         IEnumerable<ToDo> GetPriority();

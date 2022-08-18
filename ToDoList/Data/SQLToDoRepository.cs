@@ -11,27 +11,21 @@ namespace ToDoList.Data
             _context = context;
         }
 
-
         public IEnumerable<ToDo> GetAllTasks()
         {
-            if (_context.ToDo != null)
-            {
-                return _context.ToDo.ToList();
-            }
-            return null;
+            return _context.ToDo.ToList();
         }
 
-
-
-        public IEnumerable<ToDo> GetAllCategories()
+        public IEnumerable<Project> GetAllProjects()
         {
-            throw new NotImplementedException();
+            return _context.Project.ToList();
         }
 
-        public IEnumerable<ToDo> GetAllProjects()
+        public IEnumerable<Category> GetAllCategories()
         {
-            throw new NotImplementedException();
+            return _context.Category.ToList();
         }
+
 
 
         public IEnumerable<ToDo> GetCategoryInfo()

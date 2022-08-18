@@ -11,6 +11,8 @@ namespace ToDoList.Pages
         private SQLToDoRepository sQLToDoRepository;
 
         public IList<ToDo> TaskList { get; set; } = default!;
+        public IList<Project> ProjectsList { get; set; } = default!;
+        public IList<Category> CategoriesList { get; set; } = default!;
 
         public bool hasData = false;
         public string taskName = "";
@@ -28,7 +30,21 @@ namespace ToDoList.Pages
 
         public void OnGet()
         {
-            TaskList = (IList<ToDo>)sQLToDoRepository.GetAllTasks();
+            if (_context.ToDo != null)
+            {
+                TaskList = (IList<ToDo>)sQLToDoRepository.GetAllTasks();
+                ProjectsList = (IList<Project>)sQLToDoRepository.GetAllProjects();
+            }
+
+            if (_context.Project != null)
+            {
+                ProjectsList = (IList<Project>)sQLToDoRepository.GetAllProjects();
+            }
+
+            if (_context.Category != null)
+            {
+                CategoriesList = (IList<Category>)sQLToDoRepository.GetAllCategories();
+            }
         }
 
         public void OnPost()
