@@ -1,6 +1,6 @@
 ﻿@page
 @model ToDoList.Pages.ListModel
-@{
+@*@{
     ViewData["Title"] = "Nozbe 2";
 }
 <h1>@ViewData["Title"]</h1>
@@ -9,16 +9,16 @@
 {
     <p>Twój waśnie wpisany task to:</p>
     <p>* @Model.taskName</p>
-}
+}*@
 
-<div>
+@*<div>
     <form method="post">
         <label for="task">Add task</label><br>
         <input type="text" id="taskn" name="taskname"><br>
 
         <input type="submit" value="Submit">
     </form>
-</div><br><br>
+</div><br><br>*@
 
 <div>
     <h1>All Tasks</h1>
@@ -45,6 +45,7 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.TaskName)
+                @*<p>@item.TaskName</p>*@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.When)
