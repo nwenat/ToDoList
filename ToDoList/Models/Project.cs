@@ -8,5 +8,7 @@ namespace ToDoList.Models
 
         [Required]
         public string ProjectName { get; set; }
+
+        public string ProjectColour { get; set; }
     }
 }
