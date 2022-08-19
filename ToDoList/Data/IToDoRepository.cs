@@ -11,8 +11,8 @@ namespace ToDoList.Data
         IEnumerable<ToDo> GetOneProject();
         IEnumerable<ToDo> GetPriority();
         IEnumerable<ToDo> GetInbox();
-        IEnumerable<ToDo> GetTaskInfo();
-        IEnumerable<ToDo> GetProjectInfo();
-        IEnumerable<ToDo> GetCategoryInfo();
+        ToDo GetTaskInfo(int IdToDo);
+        Project GetProjectInfo(int IdProject);
+        Category GetCategoryInfo(int IdCategory);
     }
 }

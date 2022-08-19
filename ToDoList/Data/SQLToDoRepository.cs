@@ -26,12 +26,24 @@ namespace ToDoList.Data
             return _context.Category.ToList();
         }
 
-
-
-        public IEnumerable<ToDo> GetCategoryInfo()
+        public Category GetCategoryInfo(int IdCategory)
         {
-            throw new NotImplementedException();
+            return _context.Category.Find(IdCategory);
         }
+        public Project GetProjectInfo(int IdProject)
+        {
+            return _context.Project.Find(IdProject);
+        }
+
+        public ToDo GetTaskInfo(int IdToDo)
+        {
+            return _context.ToDo.Find(IdToDo);
+        }
+
+
+
+
+
 
         public IEnumerable<ToDo> GetInbox()
         {
@@ -53,14 +65,5 @@ namespace ToDoList.Data
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ToDo> GetProjectInfo()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<ToDo> GetTaskInfo()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
