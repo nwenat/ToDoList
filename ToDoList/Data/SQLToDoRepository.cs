@@ -41,14 +41,14 @@ namespace ToDoList.Data
         }
 
 
-
-
-
-
         public IEnumerable<ToDo> GetInbox()
         {
-            throw new NotImplementedException();
+            return _context.ToDo.Where(e => e.Project.Equals(null)).ToList();
         }
+
+
+
+
 
         public IEnumerable<ToDo> GetOneCategory()
         {

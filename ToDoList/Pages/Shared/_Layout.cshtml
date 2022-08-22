@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ToDoList</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link href="app/css/roboto.645d2947.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto Flex' rel='stylesheet'>
 </head>
 <body>
-    <div class="container">
+    <div>
         <header>
             <div class="navbar">
-                <a asp-page="/Index"><span>Priority</span></a>
+                <a asp-page="/Index" class="chosen">Priority</a>
                 <a asp-page="/Inbox">Inbox</a>
                 <a asp-page="/Project">Projects</a>
                 <a asp-page="/Category">Categories</a>

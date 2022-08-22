@@ -2,7 +2,8 @@ body {
     background-color: #1d1e22;
     color: #e2e2e2;
     font-size: 14px;
-    font-family: "Roboto", Arial, sans-serif;
+    font-family: "Roboto Flex", Arial, sans-serif;
+    margin: 0px;
 }
 
 html {
@@ -11,28 +12,24 @@ html {
    
 }
 
-.container{
-    background-color: darkblue;
-    width: 100%;
-}
-
 .navbar {
-    background-color: indigo;
+    /*background-color: indigo;*/
     float: left;
-    width: 20%;
+    width: 280px;
+    /*margin-top: 5px;*/
 }
 
     .navbar a {
-        position: relative;
-        box-sizing: inherit;
+        
         display: block;
         -webkit-user-drag: none;
         cursor: pointer;
         text-decoration: none;
         color: #e2e2e2;
-        height: 44px;
-        margin: auto 25px;
+        
+        padding: 15px 25px;
         vertical-align: middle;
+        /*border: solid 1px;*/
     }
 
 a:-webkit-any-link {
@@ -41,12 +38,13 @@ a:-webkit-any-link {
     text-decoration: none;
 }
 
-span {
-    vertical-align: middle;
-    
+a.chosen {
+    color: #28ce63;
+    background: #232427;
 }
 
-.main{
+
+.main {
     background-color: darkslateblue;
     overflow: hidden;
 }
