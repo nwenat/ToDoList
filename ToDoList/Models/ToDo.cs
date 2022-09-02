@@ -9,7 +9,7 @@ namespace ToDoList.Models
         [Required]
         public string TaskName { get; set; }
 
-        public DateTime? When { get; set; }
+        public DateTime? WhenToDo { get; set; }
 
         public Project? Project { get; set; }
         public ICollection<Category>? Categories { get; set; }

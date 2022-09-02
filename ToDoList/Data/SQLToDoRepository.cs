@@ -46,6 +46,13 @@ namespace ToDoList.Data
             return _context.ToDo.Where(e => e.Project.Equals(null)).ToList();
         }
 
+        public IEnumerable<ToDo> GetPriority()
+        {
+            //var output = _context.ToDo.Where(e => e.WhenToDo <= DateTime.Today).ToList();
+            //output.ForEach(e => e.IsUrgent = true);
+            //zapisac do bazy
+            return _context.ToDo.Where(e => e.IsUrgent == true).ToList();
+        }
 
 
 
@@ -60,10 +67,6 @@ namespace ToDoList.Data
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ToDo> GetPriority()
-        {
-            throw new NotImplementedException();
-        }
 
     }
 }

@@ -64,7 +64,7 @@ namespace ToDoList.Models
                     new ToDo
                     {
                         TaskName = "Meeting with friends",
-                        When = new DateTime(2022, 09, 04),
+                        WhenToDo = new DateTime(2022, 09, 04),
                         IsUrgent = false
                     }
                     );

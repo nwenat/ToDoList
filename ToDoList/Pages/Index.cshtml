@@ -26,29 +26,29 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TaskList[0].TaskName)
+                @Html.DisplayNameFor(model => model.PriorityList[0].TaskName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TaskList[0].When)
+                @Html.DisplayNameFor(model => model.PriorityList[0].WhenToDo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TaskList[0].IsUrgent)
+                @Html.DisplayNameFor(model => model.PriorityList[0].IsUrgent)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TaskList[0].Project)
+                @Html.DisplayNameFor(model => model.PriorityList[0].Project)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.TaskList) {
+@foreach (var item in Model.PriorityList) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.TaskName)
                 @*<p>@item.TaskName</p>*@
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.When)
+                @Html.DisplayFor(modelItem => item.WhenToDo)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsUrgent)

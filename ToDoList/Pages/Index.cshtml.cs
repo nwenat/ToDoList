@@ -10,7 +10,7 @@ namespace ToDoList.Pages
         private readonly ToDoList.Data.ToDoListContext _context;
         private SQLToDoRepository sQLToDoRepository;
 
-        public IList<ToDo> TaskList { get; set; } = default!;
+        public IList<ToDo> PriorityList { get; set; } = default!;
         public IList<Project> ProjectsList { get; set; } = default!;
         public IList<Category> CategoriesList { get; set; } = default!;
 
@@ -32,7 +32,7 @@ namespace ToDoList.Pages
         {
             if (_context.ToDo != null)
             {
-                TaskList = (IList<ToDo>)sQLToDoRepository.GetAllTasks();
+                PriorityList = (IList<ToDo>)sQLToDoRepository.GetPriority();
                 ProjectsList = (IList<Project>)sQLToDoRepository.GetAllProjects();
             }
 
