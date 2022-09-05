@@ -5,7 +5,7 @@ using ToDoList.Models;
 
 namespace ToDoList.Pages
 {
-    public class ListModel : PageModel
+    public class IndexModel : PageModel
     {
         private readonly ToDoList.Data.ToDoListContext _context;
         private SQLToDoRepository sQLToDoRepository;
@@ -14,12 +14,15 @@ namespace ToDoList.Pages
         public IList<Project> ProjectsList { get; set; } = default!;
         public IList<Category> CategoriesList { get; set; } = default!;
 
+        public bool wantProjects = false;
+        public bool wantCategories = false;
+
         public bool hasData = false;
         public string taskName = "";
 
 
 
-        public ListModel(ToDoList.Data.ToDoListContext context)
+        public IndexModel(ToDoList.Data.ToDoListContext context)
         {
             _context = context;
             sQLToDoRepository = new SQLToDoRepository(_context);
@@ -28,7 +31,7 @@ namespace ToDoList.Pages
 
 
 
-        public void OnGet()
+        public void OnGet(int? nav)
         {
             if (_context.ToDo != null)
             {
@@ -45,12 +48,27 @@ namespace ToDoList.Pages
             {
                 CategoriesList = (IList<Category>)sQLToDoRepository.GetAllCategories();
             }
+
+            if(nav != null)
+            {
+                if((int)nav==1)
+                { 
+                    wantProjects = true;
+                    wantCategories = false;
+                }else
+                {
+                    wantProjects = false;
+                    wantCategories = true;
+                }
+            }
+
         }
 
         public void OnPost()
         {
-            hasData = true;
-            taskName = Request.Form["taskname"];
+            //hasData = true;
+            //taskName = Request.Form["taskname"];
+
         }
     }
 }

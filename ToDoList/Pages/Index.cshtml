@@ -1,5 +1,5 @@
 ﻿@page
-@model ToDoList.Pages.ListModel
+@model ToDoList.Pages.IndexModel
 @*@{
     ViewData["Title"] = "Nozbe 2";
 }
@@ -24,19 +24,31 @@
           <div class="leftnavbar">
               <a asp-page="/Index" class="chosen">Priority</a>
               <a asp-page="/Inbox">Inbox</a>
-              <a asp-page="/Project">Projects</a>
-              <a asp-page="/Category">Categories</a>
+              <a asp-page="/Index" asp-route-nav="1">Projects</a>
+              <a asp-page="/Index" asp-route-nav="2">Categories</a>
               @*<a>Calendar</a>*@
           </div>
           <div class="rightnavbar">
-              <div class="columnname">
-                  <span>Projects</span>
-              </div>
-              <a>Test1</a>
-              <a>Test2</a>
+            @if (Model.wantProjects)
+            {
+                <div class="columnname">
+                    <span>Projects</span>
+                </div>
+                @foreach (var item in Model.ProjectsList)
+                {
+                    <a>@item.ProjectName</a>
+                }
+            }
+            @if (Model.wantCategories)
+            {
               <div class="columnname">
                   <span>Categories</span>
               </div>
+              @foreach (var item in Model.CategoriesList)
+                {
+                    <a>@item.CategoryName</a>
+                }
+            }
           </div>
     </div>
 </header>
