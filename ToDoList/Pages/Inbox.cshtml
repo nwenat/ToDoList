@@ -5,10 +5,35 @@
 
 <header>
     <div class="navbar">
-          <a asp-page="/Index">Priority</a>
-          <a asp-page="/Inbox" class="chosen">Inbox</a>
-          <a asp-page="/Project">Projects</a>
-          <a asp-page="/Category">Categories</a>
+          <div class="leftnavbar">
+              <a asp-page="/Index">Priority</a>
+              <a asp-page="/Inbox" class="chosen">Inbox</a>
+              <a asp-page="/Inbox" asp-route-nav="1">Projects</a>
+              <a asp-page="/Inbox" asp-route-nav="2">Categories</a>
+              @*<a>Calendar</a>*@
+          </div>
+          <div class="rightnavbar">
+            @if (Model.wantProjects)
+            {
+                <div class="columnname">
+                    <span>Projects</span>
+                </div>
+                @foreach (var item in Model.ProjectsList)
+                {
+                    <a asp-page="/Project" asp-route-id="@item.Id">@item.ProjectName</a>
+                }
+            }
+            @if (Model.wantCategories)
+            {
+              <div class="columnname">
+                  <span>Categories</span>
+              </div>
+              @foreach (var item in Model.CategoriesList)
+                {
+                    <a asp-page="/Category" asp-route-id="@item.Id">@item.CategoryName</a>
+                }
+            }
+          </div>
     </div>
 </header>
 

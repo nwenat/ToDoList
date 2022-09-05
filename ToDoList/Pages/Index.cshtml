@@ -36,7 +36,7 @@
                 </div>
                 @foreach (var item in Model.ProjectsList)
                 {
-                    <a>@item.ProjectName</a>
+                    <a asp-page="/Project" asp-route-id="@item.Id">@item.ProjectName</a>
                 }
             }
             @if (Model.wantCategories)
@@ -46,7 +46,7 @@
               </div>
               @foreach (var item in Model.CategoriesList)
                 {
-                    <a>@item.CategoryName</a>
+                    <a asp-page="/Category" asp-route-id="@item.Id">@item.CategoryName</a>
                 }
             }
           </div>
