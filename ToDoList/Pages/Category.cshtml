@@ -2,3 +2,12 @@
 @model ToDoList.Pages.CategoryModel
 @{
 }
+
+<header>
+    <div class="navbar">
+          <a asp-page="/Index">Priority</a>
+          <a asp-page="/Inbox">Inbox</a>
+          <a asp-page="/Project">Projects</a>
+          <a asp-page="/Category" class="chosen">Categories</a>
+    </div>
+</header>

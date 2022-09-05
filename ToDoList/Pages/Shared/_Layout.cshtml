@@ -8,22 +8,10 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto Flex' rel='stylesheet'>
 </head>
 <body>
-    <div>
-        <header>
-            <div class="navbar">
-                <a asp-page="/Index" class="chosen">Priority</a>
-                <a asp-page="/Inbox">Inbox</a>
-                <a asp-page="/Project">Projects</a>
-                <a asp-page="/Category">Categories</a>
-                @*<a>Calendar</a>*@
-            </div>
-        </header>
-
-        <div class="">
-            <main role="main">
+    <div class="main">
+        <main role="main">
             @RenderBody()
-            </main>
-        </div>
+        </main>
     </div>
 
     <footer>

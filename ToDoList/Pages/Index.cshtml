@@ -19,9 +19,40 @@
         <input type="submit" value="Submit">
     </form>
 </div><br><br>*@
+<header>
+    <div class="navbar">
+          <div class="leftnavbar">
+              <a asp-page="/Index" class="chosen">Priority</a>
+              <a asp-page="/Inbox">Inbox</a>
+              <a asp-page="/Project">Projects</a>
+              <a asp-page="/Category">Categories</a>
+              @*<a>Calendar</a>*@
+          </div>
+          <div class="rightnavbar">
+              <div class="columnname">
+                  <span>Projects</span>
+              </div>
+              <a>Test1</a>
+              <a>Test2</a>
+              <div class="columnname">
+                  <span>Categories</span>
+              </div>
+          </div>
+    </div>
+</header>
 
-<div>
-    <h1>All Tasks</h1>
+
+
+<div class="bigwindow">
+<div class="mainlist">
+    <div class="listline">
+        <div class="columnname">
+              <span>Priority</span>
+        </div>
+    </div>
+
+
+    <h1>---------</h1>
     <table class="table">
     <thead>
         <tr>
@@ -66,8 +97,8 @@
 </tbody>
 </table>
 </div>
-<br><br>
 
+</div>
 @*<div>
     <h1>All Projects</h1>
     <table class="table">
