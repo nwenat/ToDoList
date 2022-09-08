@@ -42,18 +42,20 @@
     <div class="listlines">
         <div class="columnname">
               <span>Priority</span>
-              <div class="i"></div>
+              @*<div class="i"></div>*@
         </div>
-        <div class="row">
-            <div class="circle">
+
+        @foreach (var item in Model.PriorityList) {
+            <div class="row">
+                <div class="circle">
+                </div>
+                  <a asp-page="/Project">@item.TaskName</a>
+                  <a class="star" asp-route-done="change" type="checkbox"></a>
             </div>
-              <a asp-page="/Project">Task1</a>
-        </div>
-        <div class="row">
-              <a asp-page="/Project">Task1</a>
-        </div>
+        }
+
         <div class="columnname bottom">
-              <span>Podsumowanie</span>
+              <span>@Model.ProjectsList.Count() left</span>
         </div>
     </div>
 
