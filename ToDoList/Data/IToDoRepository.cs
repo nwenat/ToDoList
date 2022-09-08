@@ -13,6 +13,6 @@ namespace ToDoList.Data
         IEnumerable<ToDo> GetInbox();
         ToDo GetTaskInfo(int IdToDo);
         Project GetProjectInfo(int IdProject);
-        Category GetCategoryInfo(int IdCategory);
+        void UpdateTask(int id, string upd);
     }
 }

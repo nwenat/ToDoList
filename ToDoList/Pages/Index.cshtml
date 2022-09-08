@@ -44,18 +44,17 @@
               <span>Priority</span>
               @*<div class="i"></div>*@
         </div>
-
         @foreach (var item in Model.PriorityList) {
             <div class="row">
-                <div class="circle">
-                </div>
-                  <a asp-page="/Project">@item.TaskName</a>
-                  <a class="star" asp-route-done="change" type="checkbox"></a>
+                <form method="post"><input hidden upd="d" id="@item.Id"/>
+                <a role="button" class="circle"></a>
+                </form>
+                <a asp-page="/Project">@item.TaskName</a>
+                <a class="star @(item.IsUrgent ? "urgent" : "")" asp-page="/Index" asp-route-upd="s" asp-route-id="@item.Id"></a>
             </div>
         }
-
         <div class="columnname bottom">
-              <span>@Model.ProjectsList.Count() left</span>
+              <span>@Model.PriorityList.Count() left</span>
         </div>
     </div>
 

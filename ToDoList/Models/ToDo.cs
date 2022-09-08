@@ -14,7 +14,7 @@ namespace ToDoList.Models
         public Project? Project { get; set; }
         public ICollection<Category>? Categories { get; set; }
         public bool IsUrgent { get; set; }
-
         public bool IsDone { get; set; }
+        public DateTime? WhenDone { get; set; }
     }
 }

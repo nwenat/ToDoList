@@ -31,7 +31,7 @@ namespace ToDoList.Pages
 
 
 
-        public void OnGet(int? nav)
+        public void OnGet(int? nav, int? id, string? upd)
         {
             if (_context.ToDo != null)
             {
@@ -62,10 +62,22 @@ namespace ToDoList.Pages
                 }
             }
 
+            //if (upd != null)
+            //{
+            //    int Id = id ?? 0;
+            //    sQLToDoRepository.UpdateTask(Id, upd);
+            //}
+
         }
 
-        public void OnPost()
+        public void OnPost(int? id, string? upd)
         {
+
+            if (upd != null)
+            {
+                int Id = id ?? 0;
+                sQLToDoRepository.UpdateTask(Id, upd);
+            }
             //hasData = true;
             //taskName = Request.Form["taskname"];
 

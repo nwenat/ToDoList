@@ -152,7 +152,8 @@ div.i{
 	background-color: gold;
 }
 
-div.circle{
+a.circle{
+	display: block;
 	display: inline;
 	float: left;
 	height: 26px;
@@ -162,6 +163,7 @@ div.circle{
     -moz-border-radius:50%;
     -webkit-border-radius:50%;
 	margin-top: 17px;
+	padding-left: 0px;
 }
 
 a.star {
@@ -178,7 +180,9 @@ a.star {
 	padding-left: 0px;
 }
 
-
+.urgent{
+	background-color: #28ce63;
+}
 
 .bottom {
 	position: absolute;

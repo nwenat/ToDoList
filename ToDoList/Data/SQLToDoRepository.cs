@@ -51,7 +51,7 @@ namespace ToDoList.Data
             //var output = _context.ToDo.Where(e => e.WhenToDo <= DateTime.Today).ToList();
             //output.ForEach(e => e.IsUrgent = true);
             //zapisac do bazy
-            return _context.ToDo.Where(e => e.IsUrgent == true).ToList();
+            return _context.ToDo.Where(e => e.IsUrgent == true && e.IsDone == false).ToList();
         }
 
 
@@ -67,6 +67,19 @@ namespace ToDoList.Data
             throw new NotImplementedException();
         }
 
+        public void UpdateTask(int id, string upd)
+        {
+            ToDo toUpd = _context.ToDo.Find(id);
+            if(upd.Equals("s"))
+            {
+                toUpd.IsUrgent = !toUpd.IsUrgent;
+            } else if(upd.Equals("d"))
+            {
+                toUpd.IsDone = !toUpd.IsDone;
+                toUpd.WhenDone = DateTime.Today;
+            }
+            _context.SaveChanges();
+        }
 
     }
 }
