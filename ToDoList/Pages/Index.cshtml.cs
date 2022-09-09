@@ -36,7 +36,6 @@ namespace ToDoList.Pages
             if (_context.ToDo != null)
             {
                 PriorityList = (IList<ToDo>)sQLToDoRepository.GetPriority();
-                ProjectsList = (IList<Project>)sQLToDoRepository.GetAllProjects();
             }
 
             if (_context.Project != null)
@@ -70,17 +69,17 @@ namespace ToDoList.Pages
 
         }
 
-        public void OnPost(int? id, string? upd)
+        public IActionResult OnPost(int id, string upd)
         {
 
             if (upd != null)
             {
-                int Id = id ?? 0;
-                sQLToDoRepository.UpdateTask(Id, upd);
+                //int Id = id ?? 0;
+                sQLToDoRepository.UpdateTask(id, upd);
             }
             //hasData = true;
             //taskName = Request.Form["taskname"];
-
+            return RedirectToPage("/Index");
         }
     }
 }

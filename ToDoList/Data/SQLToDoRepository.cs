@@ -51,7 +51,7 @@ namespace ToDoList.Data
             //var output = _context.ToDo.Where(e => e.WhenToDo <= DateTime.Today).ToList();
             //output.ForEach(e => e.IsUrgent = true);
             //zapisac do bazy
-            return _context.ToDo.Where(e => e.IsUrgent == true && e.IsDone == false).ToList();
+            return _context.ToDo.Where(e => ((e.IsUrgent == true) && (e.IsDone == false)) || ((e.IsDone == true) && (e.WhenDone == DateTime.Today))).ToList();
         }
 
 
