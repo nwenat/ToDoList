@@ -16,6 +16,7 @@ namespace ToDoList.Pages
 
         public bool wantProjects = false;
         public bool wantCategories = false;
+        public ToDo details = null;
 
         public bool hasData = false;
         public string taskName = "";
@@ -31,7 +32,7 @@ namespace ToDoList.Pages
 
 
 
-        public void OnGet(int? nav, int? id, string? upd)
+        public void OnGet(int? nav, int? id)
         {
             if (_context.ToDo != null)
             {
@@ -48,9 +49,14 @@ namespace ToDoList.Pages
                 CategoriesList = (IList<Category>)sQLToDoRepository.GetAllCategories();
             }
 
+            if (id != null)
+            {
+                details = PriorityList.Where(t => t.Id == id).First();
+            }
+
             if(nav != null)
             {
-                if((int)nav==1)
+                if(nav==1)
                 { 
                     wantProjects = true;
                     wantCategories = false;

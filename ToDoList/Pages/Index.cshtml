@@ -3,7 +3,7 @@
 
 <header>
     <div class="navbar">
-          <div class="leftnavbar">
+          <div class="leftnavbar @((Model.wantProjects || Model.wantCategories)? "minnav" : "")">
               <a asp-page="/Index" class="chosen">Priority</a>
               <a asp-page="/Inbox">Inbox</a>
               <a asp-page="/Index" asp-route-nav="1">Projects</a>
@@ -39,61 +39,46 @@
 
 <div class="bigwindow">
 <div class="mainlist">
-    <div class="listlines">
         <div class="columnname">
               <span>Priority</span>
               @*<div class="i"></div>*@
         </div>
-        @foreach (var item in Model.PriorityList) {
-            <div class="row">
-                <form method="post">
-                    <input type="hidden" name="upd" value="d"/>
-                    <input type="hidden" name="id" value="@item.Id"/>
-                <button class="done">
-                            <span class="circle">@(item.IsDone ? "V" : "")</span>
+        <div class="listlines @(Model.details == null ? "fullview" : "")">
+            @foreach (var item in Model.PriorityList) {
+                <div class="row @(item.IsDone ? "completed" : "")">
+                    <form method="post">
+                        <input type="hidden" name="upd" value="d"/>
+                        <input type="hidden" name="id" value="@item.Id"/>
+                    <button class="done">
+                                <span class="circle @(item.IsDone ? "checkmark" : "")">
+                                @if(item.IsDone){
+                                <p>&#10003;</p>
+                                }
+                                </span>
                         </button>
-                </form>
-                <a asp-page="/Project">@item.TaskName</a>
-                <form method="post">
-                    <input type="hidden" name="upd" value="s"/>
-                    <input type="hidden" name="id" value="@item.Id"/>
-                <button class="starbutton">
-                            <span class="circle star @(item.IsUrgent ? "urgent" : "")"></span>
-                        </button>
-                </form>
+                    </form>
+                    <a asp-page="/Index" asp-route-id="@item.Id">@item.TaskName</a>
+                    <form method="post">
+                        <input type="hidden" name="upd" value="s"/>
+                        <input type="hidden" name="id" value="@item.Id"/>
+                    <button class="starbutton">
+                                <span class="circle star @(item.IsUrgent ? "urgent" : "")"></span>
+                            </button>
+                    </form>
+                </div>
+            }
+        </div>
+        @if(Model.details != null)
+        {
+            <div class="details">
+                TEST
             </div>
         }
         <div class="columnname bottom">
-              <span>@Model.PriorityList.Count() left</span>
+              <span>@Model.PriorityList.Where(t => t.IsDone == false).Count() left</span>
+              <div class="i">+</div>
         </div>
-    </div>
 
-
-   @*<tbody>
-@foreach (var item in Model.PriorityList) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TaskName)
-                @*<p>@item.TaskName</p>*@
-           @* </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WhenToDo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsUrgent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Project.ProjectName)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-</tbody>
-</table>*@
 </div>
 
 </div>

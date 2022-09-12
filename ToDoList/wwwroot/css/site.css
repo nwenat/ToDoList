@@ -35,7 +35,12 @@ main {
 
 .leftnavbar {
     float: left;
-    width: 40%;
+    
+	width: 100%
+}
+
+.minnav{
+	width: 40%;
 }
 
 .rightnavbar {
@@ -91,16 +96,20 @@ a.chosen {
 }
 
 .listlines {
-    /* height: 46px; */
-    /* background-color: #303134; */
-	min-height: 100%;
+	float: left;
+	height: calc(100% - 92px);
+	width: calc(100% - 401px);
 	position: relative;
+}
+
+.fullview{
+	width: 100%;
 }
 
 .columnname {
     font-weight: bold;
     text-align: center;
-    width: 100%;
+    /* width: 100%; */
 	border-bottom: 1px solid #1d1e22;
 	background-color: #303134;
 	line-height: 46px;
@@ -131,7 +140,7 @@ div.circle{
 }
 
 .row {
-    width: cacl(100% - 25px);
+    /* width: calc(100% - 25px); */
 	line-height: 60px;
 	vertical-align: middle;
 	background-color: #303134;
@@ -140,16 +149,31 @@ div.circle{
 	/* padding-right: 15px; */
 }
 
-.row a {
-	padding-left: 10px;
+.completed{
+	opacity: 0.5;
 }
+
+.row a {
+	/* padding-left: 10px; */
+	/* background-color: red; */
+}
+
+/* .taskname { */
+	/* display: block; */
+	/* display: inline; */
+	/* height: 60px; */
+	/* width: calc(100% - 160px); */
+    /* vertical-align: middle; */
+/* } */
 
 div.i{
 	display: inline;
 	float: right;
 	height: 46px;
 	width: 46px;
-	background-color: gold;
+	font-size: 24px;
+	/* background-color: gold; */
+	
 }
 
 form {
@@ -178,6 +202,20 @@ span.circle{
 	margin-left: 16px;
 }
 
+span.checkmark {
+	color: #e2e2e2;
+	font-size: 18px;
+	background-color: #232427;
+	text-align: center;
+	vertical-align: center;
+	/* background-color: #303134; */
+}
+
+.checkmark p{
+	font-size: 18px;
+	margin: 0px;
+}
+
 button.starbutton {
 	/* display: inline; */
 	float: right;
@@ -198,10 +236,23 @@ span.star {
 	background-color: #28ce63;
 }
 
+.details{
+	float: left;
+	width: 400px;
+	height: calc(100% - 91px);
+	background-color: blue;
+	color: #e2e2e2;
+	border-left: 1px solid #303134;
+	box-shadow: 0 0 25px rgb(0 0 0 / 35%);
+}
+
 .bottom {
+	width: calc(80% - 2px);
 	position: absolute;
 	bottom:0;
+	
 	font-size: 12px;
+	border: none;
 }
 
 span {

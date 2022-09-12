@@ -43,7 +43,7 @@ namespace ToDoList.Data
 
         public IEnumerable<ToDo> GetInbox()
         {
-            return _context.ToDo.Where(e => e.Project.Equals(null)).ToList();
+            return _context.ToDo.Where(e => ((e.Project == null) && (e.IsDone == false)) || ((e.Project == null) && (e.IsDone == true) && (e.WhenDone == DateTime.Today))).ToList();
         }
 
         public IEnumerable<ToDo> GetPriority()
