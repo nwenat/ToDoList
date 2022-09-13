@@ -14,5 +14,6 @@ namespace ToDoList.Data
         ToDo GetTaskInfo(int IdToDo);
         Project GetProjectInfo(int IdProject);
         void UpdateTask(int id, string upd);
+        void AddNewTask(ToDo newToDo);
     }
 }

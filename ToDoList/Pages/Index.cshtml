@@ -1,5 +1,16 @@
 ﻿@page
 @model ToDoList.Pages.IndexModel
+@{
+    ViewData["Title"] = "Details";
+    bool navc = false;
+    bool navp = false;
+
+    //void showRightNavP()
+    //{
+    //    navp = true;
+    //    navc = false;
+    //}
+}
 
 <header>
     <div class="navbar">
@@ -7,10 +18,13 @@
               <a asp-page="/Index" class="chosen">Priority</a>
               <a asp-page="/Inbox">Inbox</a>
               <a asp-page="/Index" asp-route-nav="1">Projects</a>
+              @*<a role="button" asp-page="/Index" action="@showRightNavP">Projects</a>*@
               <a asp-page="/Index" asp-route-nav="2">Categories</a>
+              @*<a asp-page="/Index" asp-route-nav="2">Categories</a>*@
               @*<a>Calendar</a>*@
           </div>
           <div class="rightnavbar">
+            @*@if (navp)*@
             @if (Model.wantProjects)
             {
                 <div class="navcolumnname">
@@ -44,12 +58,20 @@
               @*<div class="i"></div>*@
         </div>
         <div class="listlines @(Model.details == null ? "fullview" : "")">
+            <div class="add">
+                <div class="textline">
+                    <form method="post">
+                        <input type="text" class="inputtext" name="taskname" placeholder="Enter task name" >
+                        <button asp-page-handler="Add" class="i">+</button>
+                    </form>
+                </div>
+            </div>
             @foreach (var item in Model.PriorityList) {
                 <div class="row @(item.IsDone ? "completed" : "")">
                     <form method="post">
                         <input type="hidden" name="upd" value="d"/>
                         <input type="hidden" name="id" value="@item.Id"/>
-                    <button class="done">
+                    <button asp-page-handler="Update" class="done">
                                 <span class="circle @(item.IsDone ? "checkmark" : "")">
                                 @if(item.IsDone){
                                 <p>&#10003;</p>
@@ -61,7 +83,7 @@
                     <form method="post">
                         <input type="hidden" name="upd" value="s"/>
                         <input type="hidden" name="id" value="@item.Id"/>
-                    <button class="starbutton">
+                    <button  asp-page-handler="Update" class="starbutton">
                                 <span class="circle star @(item.IsUrgent ? "urgent" : "")"></span>
                             </button>
                     </form>

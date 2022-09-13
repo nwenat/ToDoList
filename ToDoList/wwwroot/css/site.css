@@ -139,6 +139,51 @@ div.circle{
 	padding-left: 15px;
 }
 
+.add {
+    /* font-weight: bold; */
+    /* width: calc(100% - 16px); */
+    /* border-right: 1px solid #1d1e22; */
+	/* border-bottom: 1px solid #1d1e22; */
+	background-color: #1d1e22;
+	height: 57px;
+	/* padding-left: 15px; */
+}
+
+.textline {
+	position: relative;
+    width: calc(100% - 10px);
+    padding: 10px 5px;
+}
+
+input.inputtext{
+	
+	margin: 0px;
+    width: calc(100% - 80px);
+    display: block;
+    border-radius: 3px;
+    box-shadow: none;
+	appearance: none;
+
+    position: relative;
+    padding: 8px 40px;
+    font-size: inherit;
+    border: 1px solid rgba(226,226,226,0.2);
+    background: #232427;
+    color: #e2e2e2;
+	margin: 0px;
+}
+
+button.i{
+	display: inline;
+	position: relative;
+	float: right;
+	height: 46px;
+	width: 46px;
+	font-size: 24px;
+	border: none;
+	background: #232427;
+}
+
 .row {
     /* width: calc(100% - 25px); */
 	line-height: 60px;
@@ -175,6 +220,7 @@ div.i{
 	/* background-color: gold; */
 	
 }
+
 
 form {
 	display: inline;

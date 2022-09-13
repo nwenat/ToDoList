@@ -66,25 +66,30 @@ namespace ToDoList.Pages
                     wantCategories = true;
                 }
             }
-
-            //if (upd != null)
-            //{
-            //    int Id = id ?? 0;
-            //    sQLToDoRepository.UpdateTask(Id, upd);
-            //}
-
         }
 
-        public IActionResult OnPost(int id, string upd)
+        public IActionResult OnPostUpdate()
         {
-
-            if (upd != null)
+            if (Request.Form["id"] != "")
             {
-                //int Id = id ?? 0;
-                sQLToDoRepository.UpdateTask(id, upd);
+                sQLToDoRepository.UpdateTask(Int32.Parse(Request.Form["id"]), Request.Form["upd"]);
             }
-            //hasData = true;
-            //taskName = Request.Form["taskname"];
+
+            return RedirectToPage("/Index");
+        }
+
+        public IActionResult OnPostAdd()
+        {
+            if (Request.Form["taskname"] != "")
+            {
+                var newToDo = new ToDo
+                {
+                    TaskName = Request.Form["taskname"],
+                    IsUrgent = true
+                };
+                sQLToDoRepository.AddNewTask(newToDo);
+            }
+
             return RedirectToPage("/Index");
         }
     }

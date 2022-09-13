@@ -81,5 +81,11 @@ namespace ToDoList.Data
             _context.SaveChanges();
         }
 
+        public void AddNewTask(ToDo newToDo) 
+        {
+            _context.ToDo.Add(newToDo);
+            _context.SaveChanges();
+        }
+
     }
 }
