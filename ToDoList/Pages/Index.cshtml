@@ -34,6 +34,14 @@
                 {
                     <a asp-page="/Project" asp-route-id="@item.Id">@item.ProjectName</a>
                 }
+                <div class="add">
+                    <div class="textline">
+                        <form method="post">
+                            <button asp-page-handler="AddProject" class="i">+</button>
+                            <input type="text" class="inputtext" name="pname" placeholder="New Project" >
+                        </form>
+                    </div>
+                </div>
             }
             @if (Model.wantCategories)
             {
@@ -44,6 +52,14 @@
                 {
                     <a asp-page="/Category" asp-route-id="@item.Id">@item.CategoryName</a>
                 }
+                <div class="add">
+                    <div class="textline">
+                        <form method="post">
+                            <button asp-page-handler="AddCategory" class="i">+</button>
+                            <input type="text" class="inputtext" name="cname" placeholder="New Category" >
+                        </form>
+                    </div>
+                </div>
             }
           </div>
     </div>
@@ -61,8 +77,8 @@
             <div class="add">
                 <div class="textline">
                     <form method="post">
-                        <input type="text" class="inputtext" name="taskname" placeholder="Enter task name" >
                         <button asp-page-handler="Add" class="i">+</button>
+                        <input type="text" class="inputtext" name="taskname" placeholder="Enter task name" >
                     </form>
                 </div>
             </div>
@@ -93,7 +109,32 @@
         @if(Model.details != null)
         {
             <div class="details">
-                TEST
+                <div class="columnname">
+                  <span>Test</span>
+                </div>
+
+                <div class="row @(Model.details.IsDone ? "completed" : "")">
+                    <form method="post">
+                        <input type="hidden" name="upd" value="d"/>
+                        <input type="hidden" name="id" value="@Model.details.Id"/>
+                    <button asp-page-handler="Update" class="done">
+                                <span class="circle @(Model.details.IsDone ? "checkmark" : "")">
+                                @if(Model.details.IsDone){
+                                <p>&#10003;</p>
+                                }
+                                </span>
+                        </button>
+                    </form>
+                    <a asp-page="/Index" asp-route-id="@Model.details.Id">@Model.details.TaskName</a>
+                    <form method="post">
+                        <input type="hidden" name="upd" value="s"/>
+                        <input type="hidden" name="id" value="@Model.details.Id"/>
+                    <button  asp-page-handler="Update" class="starbutton">
+                                <span class="circle star @(Model.details.IsUrgent ? "urgent" : "")"></span>
+                            </button>
+                    </form>
+                </div>
+
             </div>
         }
         <div class="columnname bottom">

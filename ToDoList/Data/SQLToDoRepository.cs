@@ -87,5 +87,16 @@ namespace ToDoList.Data
             _context.SaveChanges();
         }
 
+        public void AddNewCategory(Category newCategory)
+        {
+            _context.Category.Add(newCategory);
+            _context.SaveChanges();
+        }
+
+        public void AddNewProject(Project newProject)
+        {
+            _context.Project.Add(newProject);
+            _context.SaveChanges();
+        }
     }
 }

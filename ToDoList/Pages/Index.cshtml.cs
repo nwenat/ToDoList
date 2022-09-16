@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Linq;
 using ToDoList.Data;
 using ToDoList.Models;
 
@@ -49,6 +50,10 @@ namespace ToDoList.Pages
                 CategoriesList = (IList<Category>)sQLToDoRepository.GetAllCategories();
             }
 
+            //// naprawiæ!!!!
+            //if (id != null && ProjectsList.Select(p => p.Id).Contains(id))
+            //{
+            //}
             if (id != null)
             {
                 details = PriorityList.Where(t => t.Id == id).First();
@@ -88,6 +93,37 @@ namespace ToDoList.Pages
                     IsUrgent = true
                 };
                 sQLToDoRepository.AddNewTask(newToDo);
+            }
+
+            return RedirectToPage("/Index");
+        }
+
+        public IActionResult OnPostAddProject()
+        {
+            if (Request.Form["pname"] != "")
+            {
+                var newProject = new Project
+                {
+                    ProjectName = Request.Form["pname"],
+                    ProjectColour = "#e2e2e2;"
+
+                };
+                sQLToDoRepository.AddNewProject(newProject);
+            }
+
+            return RedirectToPage("/Index");
+        }
+
+        public IActionResult OnPostAddCategory()
+        {
+            if (Request.Form["cname"] != "")
+            {
+                var newCategory = new Category
+                {
+                    CategoryName = Request.Form["cname"],
+                    CategoryColour = "#e2e2e2;"
+                };
+                sQLToDoRepository.AddNewCategory(newCategory);
             }
 
             return RedirectToPage("/Index");

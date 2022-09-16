@@ -15,5 +15,7 @@ namespace ToDoList.Data
         Project GetProjectInfo(int IdProject);
         void UpdateTask(int id, string upd);
         void AddNewTask(ToDo newToDo);
+        void AddNewCategory(Category newCategory);
+        void AddNewProject(Project newProject);
     }
 }
