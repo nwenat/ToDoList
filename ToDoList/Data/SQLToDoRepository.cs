@@ -51,7 +51,7 @@ namespace ToDoList.Data
             //var output = _context.ToDo.Where(e => e.WhenToDo <= DateTime.Today).ToList();
             //output.ForEach(e => e.IsUrgent = true);
             //zapisac do bazy
-            return _context.ToDo.Where(e => ((e.IsUrgent == true) && (e.IsDone == false)) || ((e.IsDone == true) && (e.WhenDone == DateTime.Today))).ToList();
+            return _context.ToDo.Where(e => ((e.IsUrgent == true) && (e.IsDone == false)) || ((e.IsDone == true) && (e.WhenDone == DateTime.Today))).OrderBy(e => e.IsDone).ToList();
         }
 
 
@@ -96,6 +96,14 @@ namespace ToDoList.Data
         public void AddNewProject(Project newProject)
         {
             _context.Project.Add(newProject);
+            _context.SaveChanges();
+        }
+
+        public void UpdateTaskName(int id, string newName)
+        {
+            ToDo toUpd = _context.ToDo.Find(id);
+            toUpd.TaskName = newName;
+            
             _context.SaveChanges();
         }
     }

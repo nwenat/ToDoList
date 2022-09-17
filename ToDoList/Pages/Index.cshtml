@@ -1,9 +1,9 @@
 ﻿@page
 @model ToDoList.Pages.IndexModel
 @{
-    ViewData["Title"] = "Details";
-    bool navc = false;
-    bool navp = false;
+    //ViewData["Title"] = "Details";
+    //bool navc = false;
+    //bool navp = false;
 
     //void showRightNavP()
     //{
@@ -27,7 +27,7 @@
             @*@if (navp)*@
             @if (Model.wantProjects)
             {
-                <div class="navcolumnname">
+                <div class="columnname nav">
                     <span>Projects</span>
                 </div>
                 @foreach (var item in Model.ProjectsList)
@@ -37,7 +37,7 @@
                 <div class="add">
                     <div class="textline">
                         <form method="post">
-                            <button asp-page-handler="AddProject" class="i">+</button>
+                            <button asp-page-handler="AddProject" class="i">&#9547;</button>
                             <input type="text" class="inputtext" name="pname" placeholder="New Project" >
                         </form>
                     </div>
@@ -45,7 +45,7 @@
             }
             @if (Model.wantCategories)
             {
-              <div class="navcolumnname">
+              <div class="columnname nav">
                   <span>Categories</span>
               </div>
               @foreach (var item in Model.CategoriesList)
@@ -55,7 +55,7 @@
                 <div class="add">
                     <div class="textline">
                         <form method="post">
-                            <button asp-page-handler="AddCategory" class="i">+</button>
+                            <button asp-page-handler="AddCategory" class="i">&#9547;</button>
                             <input type="text" class="inputtext" name="cname" placeholder="New Category" >
                         </form>
                     </div>
@@ -73,11 +73,11 @@
               <span>Priority</span>
               @*<div class="i"></div>*@
         </div>
-        <div class="listlines @(Model.details == null ? "fullview" : "")">
+        <div class="listlines @(Model.showDetails ? "" : "fullview")">
             <div class="add">
                 <div class="textline">
                     <form method="post">
-                        <button asp-page-handler="Add" class="i">+</button>
+                        <button asp-page-handler="Add" class="i">&#9547;</button>
                         <input type="text" class="inputtext" name="taskname" placeholder="Enter task name" >
                     </form>
                 </div>
@@ -106,40 +106,63 @@
                 </div>
             }
         </div>
-        @if(Model.details != null)
+        @if(Model.showDetails)
         {
             <div class="details">
-                <div class="columnname">
+                @*<div class="columnname">
                   <span>Test</span>
-                </div>
+                </div>*@
 
-                <div class="row @(Model.details.IsDone ? "completed" : "")">
+                <div class="row @(Model.PriorityList.First(t => t.Id == Model.DetailsId).IsDone ? "completed" : "")">
                     <form method="post">
                         <input type="hidden" name="upd" value="d"/>
-                        <input type="hidden" name="id" value="@Model.details.Id"/>
-                    <button asp-page-handler="Update" class="done">
-                                <span class="circle @(Model.details.IsDone ? "checkmark" : "")">
-                                @if(Model.details.IsDone){
+                        <input type="hidden" name="id" value="@Model.DetailsId"/>
+                        <button asp-page-handler="UpdateDetails" class="done">
+                                <span class="circle @(Model.PriorityList.First(t => t.Id == Model.DetailsId).IsDone ? "checkmark" : "")">
+                                @if(Model.PriorityList.First(t => t.Id == Model.DetailsId).IsDone){
                                 <p>&#10003;</p>
                                 }
                                 </span>
                         </button>
                     </form>
-                    <a asp-page="/Index" asp-route-id="@Model.details.Id">@Model.details.TaskName</a>
+                    <a>@(Model.PriorityList.First(t => t.Id == Model.DetailsId).TaskName)</a>
+
+                    
+
                     <form method="post">
                         <input type="hidden" name="upd" value="s"/>
-                        <input type="hidden" name="id" value="@Model.details.Id"/>
-                    <button  asp-page-handler="Update" class="starbutton">
-                                <span class="circle star @(Model.details.IsUrgent ? "urgent" : "")"></span>
-                            </button>
+                        <input type="hidden" name="id" value="@Model.DetailsId"/>
+                        <button  asp-page-handler="UpdateDetails" class="starbutton">
+                                <span class="circle star @(Model.PriorityList.First(t => t.Id == Model.DetailsId).IsUrgent ? "urgent" : "")"></span>
+                        </button>
                     </form>
                 </div>
+
+                <div class="row">
+                    <div class="textline">
+                        <form method="post">
+                            <input type="hidden" name="id" value="@Model.DetailsId"/>
+                            <button asp-page-handler="ChangeTaskName" class="i">ch</button>
+                            <input type="text" class="inputtext" name="nwetname" value="@(Model.PriorityList.First(t => t.Id == Model.DetailsId).TaskName)" >
+                        </form>
+                    </div>
+                </div>
+
+                
+                @*<div class="columnname bottom">*@
+                <div class="columnname bottom">
+                    <a class="l" asp-page="/Index" asp-route-id="">&#8677;</a>
+                    <a asp-page="/Index" asp-route-id="">&#8896;</a>
+                    <a asp-page="/Index" asp-route-id="">&#8897;</a>
+                    <a  class="r" asp-page="/Index" asp-route-id="@Model.DetailsId">kosz</a>
+                </div>
+
 
             </div>
         }
         <div class="columnname bottom">
               <span>@Model.PriorityList.Where(t => t.IsDone == false).Count() left</span>
-              <div class="i">+</div>
+              @*<div class="right">&#9547;</div>*@
         </div>
 
 </div>

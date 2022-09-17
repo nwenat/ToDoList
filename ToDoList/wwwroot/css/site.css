@@ -74,13 +74,15 @@ a.chosen {
     width: calc(100% - 272px);
 	height: 100%;
     float: left;
+	position: relative;
 }
 
 .mainlist {
     width: 100%;
-	height: calc(100% - 2px);
+	height: calc(100% - 4px);
     border: solid 1px #303134;
 	border-top: none;
+	position: relative;
 }
 
 .listlines {
@@ -103,26 +105,20 @@ a.chosen {
 	vertical-align: middle;
 }
 
-div.circle{
-	display: inline;
-	float: left;
-	height: 20px;
-	width: 20px;
-	border:1px solid #e2e2e2;    
-    border-radius:50%;
-    -moz-border-radius:50%;
-    -webkit-border-radius:50%;
-	margin-top: 13px;
-}
-
-.navcolumnname {
-    font-weight: bold;
+.nav {
     width: calc(100% - 16px);
     border-right: 1px solid #1d1e22;
-	border-bottom: 1px solid #1d1e22;
-	background-color: #303134;
-	line-height: 46px;
 	padding-left: 15px;
+	text-align: left;
+}
+
+.bottom {
+	width: 100%;
+	position: absolute; 
+    bottom: 0; 
+	font-size: 12px;
+	height: 42px;
+	border: none;
 }
 
 .add {
@@ -152,13 +148,25 @@ input.inputtext{
 	margin: 0px;
 }
 
+div.circle{
+	display: inline;
+	float: left;
+	height: 20px;
+	width: 20px;
+	border:1px solid #e2e2e2;    
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+	margin-top: 13px;
+}
+
 button.i{
 	display: inline;
 	position: relative;
 	float: right;
 	border: none;
 	background: #232427;
-	font-size: 28px;
+	font-size: 20px;
     width: 34px;
     right: 4px;
 	position: absolute;
@@ -184,12 +192,12 @@ button.i{
 	opacity: 0.5;
 }
 
-div.i{
+div.right{
 	display: inline;
 	float: right;
 	height: 46px;
 	width: 46px;
-	font-size: 24px;
+	font-size: 20px;
 	/* background-color: gold; */
 }
 
@@ -254,20 +262,28 @@ span.star {
 .details{
 	float: left;
 	width: 400px;
-	height: calc(100% - 91px);
+	height: calc(100% - 90px);
 	color: #e2e2e2;
 	border-left: 1px solid #303134;
 	box-shadow: 0 0 25px rgb(0 0 0 / 35%);
 	z-index: 10;
+	position: relative;
 }
 
-.bottom {
-	width: calc(100% - 272px);
-	position: absolute;
-	bottom:0;
-	font-size: 12px;
-	border: none;
+.bottom a{
+	padding: 0px 48px;
+	font-size: 20px;
 }
+
+a.l {
+	padding-left: 0px;
+}
+
+a.r {
+	padding-right: 0px;
+}
+
+
 
 .footer {
     text-align: left;

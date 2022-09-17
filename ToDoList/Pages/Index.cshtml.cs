@@ -17,7 +17,8 @@ namespace ToDoList.Pages
 
         public bool wantProjects = false;
         public bool wantCategories = false;
-        public ToDo details = null;
+        public bool showDetails = false;
+        public int DetailsId = 0;
 
         public bool hasData = false;
         public string taskName = "";
@@ -56,7 +57,8 @@ namespace ToDoList.Pages
             //}
             if (id != null)
             {
-                details = PriorityList.Where(t => t.Id == id).First();
+                showDetails = true;
+                DetailsId = (int)id;
             }
 
             if(nav != null)
@@ -81,6 +83,16 @@ namespace ToDoList.Pages
             }
 
             return RedirectToPage("/Index");
+        }
+
+        public IActionResult OnPostUpdateDetails()
+        {
+            if (Request.Form["id"] != "")
+            {
+                sQLToDoRepository.UpdateTask(Int32.Parse(Request.Form["id"]), Request.Form["upd"]);
+            }
+
+            return RedirectToPage("/Index", new { id = Request.Form["id"] });
         }
 
         public IActionResult OnPostAdd()
@@ -127,6 +139,16 @@ namespace ToDoList.Pages
             }
 
             return RedirectToPage("/Index");
+        }
+
+        public IActionResult OnPostChangeTaskName()
+        {
+            if (Request.Form["nwetname"] != "")
+            {
+                sQLToDoRepository.UpdateTaskName(Int32.Parse(Request.Form["id"]), Request.Form["nwetname"]);
+            }
+
+            return RedirectToPage("/Index", new {id = Request.Form["id"]});
         }
     }
 }
