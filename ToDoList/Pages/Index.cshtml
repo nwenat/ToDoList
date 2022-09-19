@@ -148,13 +148,23 @@
                     </div>
                 </div>
 
+               @* <div class="row">
+                    <span>Poprzedni Id: @Model.previousId</span>
+                    <span>Następny Id: @Model.nextId</span>
+                </div>*@
+
                 
                 @*<div class="columnname bottom">*@
                 <div class="columnname bottom">
                     <a class="l" asp-page="/Index" asp-route-id="">&#8677;</a>
-                    <a asp-page="/Index" asp-route-id="">&#8896;</a>
-                    <a asp-page="/Index" asp-route-id="">&#8897;</a>
-                    <a  class="r" asp-page="/Index" asp-route-id="@Model.DetailsId">kosz</a>
+                    <a asp-page="/Index" asp-route-id="@(Model.PriorityList.TakeWhile(t => t.Id != Model.DetailsId).DefaultIfEmpty(Model.PriorityList[Model.PriorityList.Count - 1]).LastOrDefault().Id)">&#8896;</a>
+                    @*<a asp-page="/Index" asp-route-id="@(Model.PriorityList.TakeWhile(t => t.Id != Model.DetailsId));">&#8896;</a>*@
+                    <a asp-page="/Index" asp-route-id="@(Model.PriorityList.SkipWhile(t => t.Id != Model.DetailsId).Skip(1).DefaultIfEmpty(Model.PriorityList[0]).FirstOrDefault().Id)">&#8897;</a>
+                    
+                    <form method="post">
+                            <input type="hidden" name="id" value="@Model.DetailsId"/>
+                            <button asp-page-handler="DeleteTask" class="trash">&#128465;</button>
+                    </form>
                 </div>
 
 

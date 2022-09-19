@@ -106,5 +106,22 @@ namespace ToDoList.Data
             
             _context.SaveChanges();
         }
+        
+        public void DeleteTask(int id)
+        {
+            ToDo toDelete = _context.ToDo.Find(id);
+
+            if (toDelete.Project != null)
+            {
+                toDelete.Project = null;
+            }
+            if (toDelete.Categories != null)
+            {
+                toDelete.Categories = null;
+            }
+            _context.ToDo.Remove(toDelete);
+
+            _context.SaveChanges();
+        }
     }
 }

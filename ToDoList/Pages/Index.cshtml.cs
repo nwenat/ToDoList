@@ -20,19 +20,17 @@ namespace ToDoList.Pages
         public bool showDetails = false;
         public int DetailsId = 0;
 
-        public bool hasData = false;
-        public string taskName = "";
+        //public int nextId = 0;
+        //public int previousId = 0;
 
-
+        //public bool hasData = false;
+        //public string taskName = "";
 
         public IndexModel(ToDoList.Data.ToDoListContext context)
         {
             _context = context;
             sQLToDoRepository = new SQLToDoRepository(_context);
         }
-
-
-
 
         public void OnGet(int? nav, int? id)
         {
@@ -51,11 +49,7 @@ namespace ToDoList.Pages
                 CategoriesList = (IList<Category>)sQLToDoRepository.GetAllCategories();
             }
 
-            //// naprawiæ!!!!
-            //if (id != null && ProjectsList.Select(p => p.Id).Contains(id))
-            //{
-            //}
-            if (id != null)
+            if ((id != null) && (PriorityList.Select(p => p.Id).ToList().Contains((int)id)))
             {
                 showDetails = true;
                 DetailsId = (int)id;
@@ -81,7 +75,6 @@ namespace ToDoList.Pages
             {
                 sQLToDoRepository.UpdateTask(Int32.Parse(Request.Form["id"]), Request.Form["upd"]);
             }
-
             return RedirectToPage("/Index");
         }
 
@@ -91,7 +84,6 @@ namespace ToDoList.Pages
             {
                 sQLToDoRepository.UpdateTask(Int32.Parse(Request.Form["id"]), Request.Form["upd"]);
             }
-
             return RedirectToPage("/Index", new { id = Request.Form["id"] });
         }
 
@@ -106,7 +98,6 @@ namespace ToDoList.Pages
                 };
                 sQLToDoRepository.AddNewTask(newToDo);
             }
-
             return RedirectToPage("/Index");
         }
 
@@ -122,7 +113,6 @@ namespace ToDoList.Pages
                 };
                 sQLToDoRepository.AddNewProject(newProject);
             }
-
             return RedirectToPage("/Index");
         }
 
@@ -137,7 +127,6 @@ namespace ToDoList.Pages
                 };
                 sQLToDoRepository.AddNewCategory(newCategory);
             }
-
             return RedirectToPage("/Index");
         }
 
@@ -147,8 +136,17 @@ namespace ToDoList.Pages
             {
                 sQLToDoRepository.UpdateTaskName(Int32.Parse(Request.Form["id"]), Request.Form["nwetname"]);
             }
-
             return RedirectToPage("/Index", new {id = Request.Form["id"]});
+        }
+
+        
+        public IActionResult OnPostDeleteTask()
+        {
+            if (Request.Form["id"] != "")
+            {
+                sQLToDoRepository.DeleteTask(Int32.Parse(Request.Form["id"]));
+            }
+            return RedirectToPage("/Index");
         }
     }
 }
