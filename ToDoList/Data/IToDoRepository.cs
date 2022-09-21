@@ -7,8 +7,8 @@ namespace ToDoList.Data
         IEnumerable<ToDo> GetAllTasks();
         IEnumerable<Project> GetAllProjects();
         IEnumerable<Category> GetAllCategories();
-        IEnumerable<ToDo> GetOneCategory();
-        IEnumerable<ToDo> GetOneProject();
+        IEnumerable<ToDo> GetOneCategory(int cid);
+        IEnumerable<ToDo> GetOneProject(int pid);
         IEnumerable<ToDo> GetPriority();
         IEnumerable<ToDo> GetInbox();
         ToDo GetTaskInfo(int IdToDo);

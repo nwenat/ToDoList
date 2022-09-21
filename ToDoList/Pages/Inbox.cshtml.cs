@@ -86,7 +86,7 @@ namespace ToDoList.Pages
                 var newToDo = new ToDo
                 {
                     TaskName = Request.Form["taskname"],
-                    IsUrgent = true
+                    IsUrgent = false
                 };
                 sQLToDoRepository.AddNewTask(newToDo);
             }
@@ -129,7 +129,6 @@ namespace ToDoList.Pages
             }
             return RedirectToPage("/Inbox", new { id = Request.Form["id"] });
         }
-
 
         public IActionResult OnPostDeleteTask()
         {

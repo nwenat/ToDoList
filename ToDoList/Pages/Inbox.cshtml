@@ -19,7 +19,7 @@
                 </div>
                 @foreach (var item in Model.ProjectsList)
                 {
-                    <a asp-page="/Project" asp-route-id="@item.Id">@item.ProjectName</a>
+                    <a asp-page="/Project" asp-route-pid="@item.Id">@item.ProjectName</a>
                 }
                 <div class="add">
                     <div class="textline">
@@ -57,7 +57,7 @@
 <div class="bigwindow">
 <div class="mainlist">
         <div class="columnname">
-              <span>Priority</span>
+              <span>Inbox</span>
         </div>
         <div class="listlines @(Model.showDetails ? "" : "fullview")">
             <div class="add">

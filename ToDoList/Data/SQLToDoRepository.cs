@@ -40,7 +40,6 @@ namespace ToDoList.Data
             return _context.ToDo.Find(IdToDo);
         }
 
-
         public IEnumerable<ToDo> GetInbox()
         {
             return _context.ToDo.Where(e => ((e.Project == null) && (e.IsDone == false)) || ((e.Project == null) && (e.IsDone == true) && (e.WhenDone == DateTime.Today))).OrderBy(e => e.IsDone).ToList();
@@ -51,17 +50,14 @@ namespace ToDoList.Data
             return _context.ToDo.Where(e => ((e.IsUrgent == true) && (e.IsDone == false)) || ((e.IsDone == true) && (e.WhenDone == DateTime.Today))).OrderBy(e => e.IsDone).ToList();
         }
 
-
-
-
-        public IEnumerable<ToDo> GetOneCategory()
+        public IEnumerable<ToDo> GetOneCategory(int cid)
         {
-            throw new NotImplementedException();
+            return _context.ToDo.Where(e => ((e.Project.Id == cid) && (e.IsDone == false)) || ((e.Project.Id == cid) && (e.WhenDone == DateTime.Today))).OrderBy(e => e.IsDone).ToList();
         }
 
-        public IEnumerable<ToDo> GetOneProject()
+        public IEnumerable<ToDo> GetOneProject(int pid)
         {
-            throw new NotImplementedException();
+            return _context.ToDo.Where(e => ((e.Project.Id == pid) && (e.IsDone == false)) || ((e.Project.Id == pid) && (e.WhenDone == DateTime.Today))).OrderBy(e => e.IsDone).ToList();
         }
 
         public void UpdateTask(int id, string upd)
