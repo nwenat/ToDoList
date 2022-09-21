@@ -142,10 +142,13 @@
                     <div class="textline">
                         <form method="post">
                             <input type="hidden" name="id" value="@Model.DetailsId"/>
-                            <button asp-page-handler="ChangeTaskName" class="i">ch</button>
                             <input type="text" class="inputtext" name="nwetname" value="@(Model.PriorityList.First(t => t.Id == Model.DetailsId).TaskName)" >
+                            <button asp-page-handler="ChangeTaskName" class="savebutton">Save</button>
                         </form>
                     </div>
+                </div>
+                <div class="ditattributes">
+
                 </div>
 
                @* <div class="row">

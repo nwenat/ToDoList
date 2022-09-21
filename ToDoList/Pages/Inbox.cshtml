@@ -5,81 +5,153 @@
 
 <header>
     <div class="navbar">
-          <div class="leftnavbar">
+          <div class="leftnavbar @((Model.wantProjects || Model.wantCategories)? "minnav" : "")">
               <a asp-page="/Index">Priority</a>
               <a asp-page="/Inbox" class="chosen">Inbox</a>
               <a asp-page="/Inbox" asp-route-nav="1">Projects</a>
               <a asp-page="/Inbox" asp-route-nav="2">Categories</a>
-              @*<a>Calendar</a>*@
           </div>
           <div class="rightnavbar">
             @if (Model.wantProjects)
             {
-                <div class="columnname">
+                <div class="columnname nav">
                     <span>Projects</span>
                 </div>
                 @foreach (var item in Model.ProjectsList)
                 {
                     <a asp-page="/Project" asp-route-id="@item.Id">@item.ProjectName</a>
                 }
+                <div class="add">
+                    <div class="textline">
+                        <form method="post">
+                            <button asp-page-handler="AddProject" class="i">&#9547;</button>
+                            <input type="text" class="inputtext" name="pname" placeholder="New Project" >
+                        </form>
+                    </div>
+                </div>
             }
             @if (Model.wantCategories)
             {
-              <div class="columnname">
+              <div class="columnname nav">
                   <span>Categories</span>
               </div>
               @foreach (var item in Model.CategoriesList)
                 {
                     <a asp-page="/Category" asp-route-id="@item.Id">@item.CategoryName</a>
                 }
+                <div class="add">
+                    <div class="textline">
+                        <form method="post">
+                            <button asp-page-handler="AddCategory" class="i">&#9547;</button>
+                            <input type="text" class="inputtext" name="cname" placeholder="New Category" >
+                        </form>
+                    </div>
+                </div>
             }
           </div>
     </div>
 </header>
 
-<div>
-    <h1>All Tasks</h1>
-    <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.InboxList[0].TaskName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InboxList[0].WhenToDo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InboxList[0].IsUrgent)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InboxList[0].Project)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.InboxList) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TaskName)
-                @*<p>@item.TaskName</p>*@
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WhenToDo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsUrgent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Project.ProjectName)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-</tbody>
-</table>
+
+
+<div class="bigwindow">
+<div class="mainlist">
+        <div class="columnname">
+              <span>Priority</span>
+        </div>
+        <div class="listlines @(Model.showDetails ? "" : "fullview")">
+            <div class="add">
+                <div class="textline">
+                    <form method="post">
+                        <button asp-page-handler="Add" class="i">&#9547;</button>
+                        <input type="text" class="inputtext" name="taskname" placeholder="Enter task name" >
+                    </form>
+                </div>
+            </div>
+            @foreach (var item in Model.InboxList) {
+                <div class="row @(item.IsDone ? "completed" : "")">
+                    <form method="post">
+                        <input type="hidden" name="upd" value="d"/>
+                        <input type="hidden" name="id" value="@item.Id"/>
+                    <button asp-page-handler="Update" class="done">
+                                <span class="circle @(item.IsDone ? "checkmark" : "")">
+                                @if(item.IsDone){
+                                <p>&#10003;</p>
+                                }
+                                </span>
+                        </button>
+                    </form>
+                    <a asp-page="/Inbox" asp-route-id="@item.Id">@item.TaskName</a>
+                    <form method="post">
+                        <input type="hidden" name="upd" value="s"/>
+                        <input type="hidden" name="id" value="@item.Id"/>
+                    <button  asp-page-handler="Update" class="starbutton">
+                                <span class="circle star @(item.IsUrgent ? "urgent" : "")"></span>
+                            </button>
+                    </form>
+                </div>
+            }
+        </div>
+        @if(Model.showDetails)
+        {
+            <div class="details">
+
+                <div class="row @(Model.InboxList.First(t => t.Id == Model.DetailsId).IsDone ? "completed" : "")">
+                    <form method="post">
+                        <input type="hidden" name="upd" value="d"/>
+                        <input type="hidden" name="id" value="@Model.DetailsId"/>
+                        <button asp-page-handler="UpdateDetails" class="done">
+                                <span class="circle @(Model.InboxList.First(t => t.Id == Model.DetailsId).IsDone ? "checkmark" : "")">
+                                @if(Model.InboxList.First(t => t.Id == Model.DetailsId).IsDone){
+                                <p>&#10003;</p>
+                                }
+                                </span>
+                        </button>
+                    </form>
+                    <a>@(Model.InboxList.First(t => t.Id == Model.DetailsId).TaskName)</a>
+
+                    
+
+                    <form method="post">
+                        <input type="hidden" name="upd" value="s"/>
+                        <input type="hidden" name="id" value="@Model.DetailsId"/>
+                        <button  asp-page-handler="UpdateDetails" class="starbutton">
+                                <span class="circle star @(Model.InboxList.First(t => t.Id == Model.DetailsId).IsUrgent ? "urgent" : "")"></span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="row">
+                    <div class="textline">
+                        <form method="post">
+                            <input type="hidden" name="id" value="@Model.DetailsId"/>
+                            <input type="text" class="inputtext" name="nwetname" value="@(Model.InboxList.First(t => t.Id == Model.DetailsId).TaskName)" >
+                            <button asp-page-handler="ChangeTaskName" class="savebutton">Save</button>
+                        </form>
+                    </div>
+                </div>
+                @*<div class="ditattributes">
+
+                </div>*@
+
+                <div class="columnname bottom">
+                    <a class="l" asp-page="/Inbox" asp-route-id="">&#8677;</a>
+                    <a asp-page="/Inbox" asp-route-id="@(Model.InboxList.TakeWhile(t => t.Id != Model.DetailsId).DefaultIfEmpty(Model.InboxList[Model.InboxList.Count - 1]).LastOrDefault().Id)">&#8896;</a>
+                    <a asp-page="/Inbox" asp-route-id="@(Model.InboxList.SkipWhile(t => t.Id != Model.DetailsId).Skip(1).DefaultIfEmpty(Model.InboxList[0]).FirstOrDefault().Id)">&#8897;</a>
+                    
+                    <form method="post">
+                            <input type="hidden" name="id" value="@Model.DetailsId"/>
+                            <button asp-page-handler="DeleteTask" class="trash">&#128465;</button>
+                    </form>
+                </div>
+
+
+            </div>
+        }
+        <div class="columnname bottom">
+              <span>@Model.InboxList.Where(t => t.IsDone == false).Count() left</span>
+        </div>
+
+</div>
+
 </div>
