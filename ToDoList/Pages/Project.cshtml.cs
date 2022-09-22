@@ -17,6 +17,7 @@ namespace ToDoList.Pages
         public bool wantProjects = true;
         public bool wantCategories = false;
         public bool showDetails = false;
+        public bool showProjectInfo = false;
         public int DetailsId = 0;
         public int projectId = 0;
 
@@ -26,7 +27,7 @@ namespace ToDoList.Pages
             sQLToDoRepository = new SQLToDoRepository(_context);
         }
 
-        public void OnGet(int pId, int? nav, int? id)
+        public void OnGet(int pId, int? nav, int? id, bool? info)
         {
             if (_context.ToDo != null)
             {
@@ -44,10 +45,16 @@ namespace ToDoList.Pages
 
             projectId = pId;
 
-            if ((id != null) && (ProjectTaskList.Select(p => p.Id).ToList().Contains((int)id)))
+            if ((info != null) && (bool)info)
+            {
+                showProjectInfo = true;
+                //showDetails = false;
+            }
+            else if ((id != null) && (ProjectTaskList.Select(p => p.Id).ToList().Contains((int)id)))
             {
                 showDetails = true;
                 DetailsId = (int)id;
+                //showProjectInfo = false;
             }
 
             if (nav != null)
@@ -84,23 +91,21 @@ namespace ToDoList.Pages
             return RedirectToPage("/Project", new { id = Request.Form["id"], pid = Request.Form["pid"] });
         }
 
-
-        /// Naprawiæ!!!!!!!!!!!!!!!!!!!!
         public IActionResult OnPostAdd()
         {
             if (Request.Form["taskname"] != "")
             {
-                var ProjectsListTest = (IList<Project>)sQLToDoRepository.GetAllProjects();
                 var newToDo = new ToDo
                 {
                     TaskName = Request.Form["taskname"],
-                    Project = ProjectsListTest.Where(p => p.Id == Request.Form["pid"]).First(),
+                    Project = sQLToDoRepository.GetProjectInfo(Int32.Parse(Request.Form["pid"])),
                     IsUrgent = false
                 };
                 sQLToDoRepository.AddNewTask(newToDo);
             }
             return RedirectToPage("/Project", new { pid = Request.Form["pid"] });
         }
+
         public IActionResult OnPostAddProject()
         {
             if (Request.Form["pname"] != "")
@@ -132,9 +137,9 @@ namespace ToDoList.Pages
 
         public IActionResult OnPostChangeTaskName()
         {
-            if (Request.Form["nwetname"] != "")
+            if (Request.Form["newtname"] != "")
             {
-                sQLToDoRepository.UpdateTaskName(Int32.Parse(Request.Form["id"]), Request.Form["nwetname"]);
+                sQLToDoRepository.UpdateTaskName(Int32.Parse(Request.Form["id"]), Request.Form["newtname"]);
             }
             return RedirectToPage("/Project", new { id = Request.Form["id"], pid = Request.Form["pid"] });
         }
@@ -146,6 +151,24 @@ namespace ToDoList.Pages
                 sQLToDoRepository.DeleteTask(Int32.Parse(Request.Form["id"]));
             }
             return RedirectToPage("/Project", new { pid = Request.Form["pid"] });
+        }
+
+        public IActionResult OnPostDeleteProject()
+        {
+            if (Request.Form["pid"] != "")
+            {
+                sQLToDoRepository.DeleteProject(Int32.Parse(Request.Form["pid"]));
+            }
+            return RedirectToPage("/Index");
+        }
+
+        public IActionResult OnPostChangeProjectName()
+        {
+            if (Request.Form["newpname"] != "")
+            {
+                sQLToDoRepository.UpdateProjectName(Int32.Parse(Request.Form["pid"]), Request.Form["newpname"]);
+            }
+            return RedirectToPage("/Project", new { pid = Request.Form["pid"], info = true });
         }
     }
 }

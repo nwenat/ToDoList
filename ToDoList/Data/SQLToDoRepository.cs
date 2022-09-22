@@ -116,5 +116,26 @@ namespace ToDoList.Data
 
             _context.SaveChanges();
         }
+
+        public void UpdateProjectName(int id, string newName)
+        {
+            Project toUpd = _context.Project.Find(id);
+            toUpd.ProjectName = newName;
+
+            _context.SaveChanges();
+        }
+
+        public void DeleteProject(int id)
+        {
+            Project toDelete = _context.Project.Find(id);
+
+            foreach(ToDo taskInProject in _context.ToDo.Where(t => t.Project == toDelete).ToList())
+            {
+                _context.ToDo.Remove(taskInProject);
+            }
+            _context.Project.Remove(toDelete);
+
+            _context.SaveChanges();
+        }
     }
 }

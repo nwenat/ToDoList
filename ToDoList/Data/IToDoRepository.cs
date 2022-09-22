@@ -19,5 +19,7 @@ namespace ToDoList.Data
         void AddNewProject(Project newProject);
         void UpdateTaskName(int id, string newName);
         void DeleteTask(int id);
+        void DeleteProject(int id);
+        void UpdateProjectName(int id, string newName);
     }
 }

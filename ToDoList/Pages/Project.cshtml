@@ -57,13 +57,18 @@
 <div class="bigwindow">
 <div class="mainlist">
         <div class="columnname">
-              <span>Inbox</span>
+              <span>@Model.ProjectsList.First(p => p.Id == Model.projectId).ProjectName</span>
+              @*<span class="circle info">
+                <a class="info i" asp-page="/Project" asp-route-info="true" asp-route-pid="@Model.projectId">&#8505;</a>
+              </span>*@
+                <a class="info i" asp-page="/Project" asp-route-info="true" asp-route-pid="@Model.projectId">&#8505;</a>
         </div>
-        <div class="listlines @(Model.showDetails ? "" : "fullview")">
+        <div class="listlines @((Model.showDetails || Model.showProjectInfo ) ? "" : "fullview")">
             <div class="add">
                 <div class="textline">
                     <form method="post">
-                        <button asp-page-handler="Add" class="i" asp-route-pid="@Model.projectId">&#9547;</button>
+                        <input type="hidden" name="pid" value="@Model.projectId"/>
+                        <button asp-page-handler="Add" class="i">&#9547;</button>
                         <input type="text" class="inputtext" name="taskname" placeholder="Enter task name" >
                     </form>
                 </div>
@@ -112,9 +117,6 @@
                         </button>
                     </form>
                     <a>@(Model.ProjectTaskList.First(t => t.Id == Model.DetailsId).TaskName)</a>
-
-                    
-
                     <form method="post">
                         <input type="hidden" name="upd" value="s"/>
                         <input type="hidden" name="id" value="@Model.DetailsId"/>
@@ -129,7 +131,7 @@
                     <div class="textline">
                         <form method="post">
                             <input type="hidden" name="id" value="@Model.DetailsId"/>
-                            <input type="text" class="inputtext" name="nwetname" value="@(Model.ProjectTaskList.First(t => t.Id == Model.DetailsId).TaskName)" >
+                            <input type="text" class="inputtext" name="newtname" value="@(Model.ProjectTaskList.First(t => t.Id == Model.DetailsId).TaskName)" >
                             <input type="hidden" name="pid" value="@Model.projectId"/>
                             <button asp-page-handler="ChangeTaskName" class="savebutton">Save</button>
                         </form>
@@ -154,6 +156,34 @@
 
             </div>
         }
+
+
+        @if(Model.showProjectInfo)
+        {
+            <div class="details">
+
+                <div class="row">
+                    <div class="textline">
+                        <form method="post">
+                            <input type="text" class="inputtext" name="newpname" value="@(Model.ProjectsList.First(p => p.Id == Model.projectId).ProjectName)" >
+                            <input type="hidden" name="pid" value="@Model.projectId"/>
+                            <button asp-page-handler="ChangeProjectName" class="savebutton">Save</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="columnname bottom">
+                    <a class="l" asp-page="/Project" asp-route-info="false" asp-route-pid="@Model.projectId">&#8677;</a>
+                    
+                    <form method="post">
+                            <input type="hidden" name="pid" value="@Model.projectId"/>
+                            <button asp-page-handler="DeleteProject" class="trash">&#128465;</button>
+                    </form>
+                </div>
+            </div>
+        }
+
+
         <div class="columnname bottom">
               <span>@Model.ProjectTaskList.Where(t => t.IsDone == false).Count() left</span>
         </div>
