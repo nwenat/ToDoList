@@ -8,8 +8,8 @@
           <div class="leftnavbar @((Model.wantProjects || Model.wantCategories)? "minnav" : "")">
               <a asp-page="/Index">Priority</a>
               <a asp-page="/Inbox">Inbox</a>
-              <a asp-page="/Project" class="chosen" asp-route-nav="1">Projects</a>
-              <a asp-page="/Project" asp-route-nav="2">Categories</a>
+              <a asp-page="/Project" class="chosen" asp-route-nav="1" asp-route-pid="@Model.projectId">Projects</a>
+              <a asp-page="/Project" asp-route-nav="2" asp-route-pid="@Model.projectId">Categories</a>
           </div>
           <div class="rightnavbar">
             @if (Model.wantProjects)
@@ -24,6 +24,7 @@
                 <div class="add">
                     <div class="textline">
                         <form method="post">
+                            <input type="hidden" name="pid" value="@Model.projectId"/>
                             <button asp-page-handler="AddProject" class="i">&#9547;</button>
                             <input type="text" class="inputtext" name="pname" placeholder="New Project" >
                         </form>
@@ -42,6 +43,7 @@
                 <div class="add">
                     <div class="textline">
                         <form method="post">
+                            <input type="hidden" name="pid" value="@Model.projectId"/>
                             <button asp-page-handler="AddCategory" class="i">&#9547;</button>
                             <input type="text" class="inputtext" name="cname" placeholder="New Category" >
                         </form>
@@ -53,15 +55,11 @@
 </header>
 
 
-
 <div class="bigwindow">
 <div class="mainlist">
         <div class="columnname">
               <span>@Model.ProjectsList.First(p => p.Id == Model.projectId).ProjectName</span>
-              @*<span class="circle info">
-                <a class="info i" asp-page="/Project" asp-route-info="true" asp-route-pid="@Model.projectId">&#8505;</a>
-              </span>*@
-                <a class="info i" asp-page="/Project" asp-route-info="true" asp-route-pid="@Model.projectId">&#8505;</a>
+              <a class="info" asp-page="/Project" asp-route-info="true" asp-route-pid="@Model.projectId">&#8505;</a>
         </div>
         <div class="listlines @((Model.showDetails || Model.showProjectInfo ) ? "" : "fullview")">
             <div class="add">
@@ -161,7 +159,8 @@
         @if(Model.showProjectInfo)
         {
             <div class="details">
-
+                <div class="columnname">
+                </div>
                 <div class="row">
                     <div class="textline">
                         <form method="post">

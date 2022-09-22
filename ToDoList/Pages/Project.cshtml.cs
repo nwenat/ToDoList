@@ -70,7 +70,6 @@ namespace ToDoList.Pages
                     wantCategories = true;
                 }
             }
-
         }
 
         public IActionResult OnPostUpdate()

@@ -52,7 +52,7 @@ namespace ToDoList.Data
 
         public IEnumerable<ToDo> GetOneCategory(int cid)
         {
-            return _context.ToDo.Where(e => ((e.Project.Id == cid) && (e.IsDone == false)) || ((e.Project.Id == cid) && (e.WhenDone == DateTime.Today))).OrderBy(e => e.IsDone).ToList();
+            return _context.ToDo.Where(e => ((e.Categories.Any(c => c.Id == cid)) && (e.IsDone == false)) || ((e.Categories.Any(c => c.Id == cid)) && (e.WhenDone == DateTime.Today))).OrderBy(e => e.IsDone).ToList();
         }
 
         public IEnumerable<ToDo> GetOneProject(int pid)
@@ -134,6 +134,30 @@ namespace ToDoList.Data
                 _context.ToDo.Remove(taskInProject);
             }
             _context.Project.Remove(toDelete);
+
+            _context.SaveChanges();
+        }
+
+        public void UpdateCategoryName(int id, string newName)
+        {
+            Category toUpd = _context.Category.Find(id);
+            toUpd.CategoryName = newName;
+
+            _context.SaveChanges();
+        }
+
+        public void DeleteCategory(int id)
+        {
+            Category toDelete = _context.Category.Find(id);
+
+            foreach (ToDo taskInCategory in _context.ToDo.Where(t => t.Categories == toDelete).ToList())
+            {
+                if ((taskInCategory.Categories != null) && (toDelete != null))
+                {
+                    taskInCategory.Categories.Remove(toDelete);
+                }
+            }
+            _context.Category.Remove(toDelete);
 
             _context.SaveChanges();
         }

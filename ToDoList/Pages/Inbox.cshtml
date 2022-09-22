@@ -37,7 +37,7 @@
               </div>
               @foreach (var item in Model.CategoriesList)
                 {
-                    <a asp-page="/Category" asp-route-id="@item.Id">@item.CategoryName</a>
+                    <a asp-page="/Category" asp-route-cid="@item.Id">@item.CategoryName</a>
                 }
                 <div class="add">
                     <div class="textline">

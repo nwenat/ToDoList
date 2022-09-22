@@ -21,5 +21,7 @@ namespace ToDoList.Data
         void DeleteTask(int id);
         void DeleteProject(int id);
         void UpdateProjectName(int id, string newName);
+        void UpdateCategoryName(int id, string newName);
+        void DeleteCategory(int id);
     }
 }

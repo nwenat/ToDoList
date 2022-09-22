@@ -5,9 +5,188 @@
 
 <header>
     <div class="navbar">
-          <a asp-page="/Index">Priority</a>
-          <a asp-page="/Inbox">Inbox</a>
-          <a asp-page="/Project">Projects</a>
-          <a asp-page="/Category" class="chosen">Categories</a>
+          <div class="leftnavbar @((Model.wantProjects || Model.wantCategories)? "minnav" : "")">
+              <a asp-page="/Index">Priority</a>
+              <a asp-page="/Inbox">Inbox</a>
+              <a asp-page="/Category" asp-route-nav="1" asp-route-pid="@Model.categoryId">Projects</a>
+              <a asp-page="/Category" class="chosen" asp-route-nav="2" asp-route-pid="@Model.categoryId">Categories</a>
+          </div>
+          <div class="rightnavbar">
+            @if (Model.wantProjects)
+            {
+                <div class="columnname nav">
+                    <span>Projects</span>
+                </div>
+                @foreach (var item in Model.ProjectsList)
+                {
+                    <a asp-page="/Project" asp-route-pid="@item.Id">@item.ProjectName</a>
+                }
+                <div class="add">
+                    <div class="textline">
+                        <form method="post">
+                            <input type="hidden" name="cid" value="@Model.categoryId"/>
+                            <button asp-page-handler="AddProject" class="i">&#9547;</button>
+                            <input type="text" class="inputtext" name="pname" placeholder="New Project" >
+                        </form>
+                    </div>
+                </div>
+            }
+            @if (Model.wantCategories)
+            {
+              <div class="columnname nav">
+                  <span>Categories</span>
+              </div>
+              @foreach (var item in Model.CategoriesList)
+                {
+                    <a asp-page="/Category" asp-route-cid="@item.Id" class="@(item.Id == Model.categoryId ? "chosen" : "")" >@item.CategoryName</a>
+                }
+                <div class="add">
+                    <div class="textline">
+                        <form method="post">
+                            <input type="hidden" name="cid" value="@Model.categoryId"/>
+                            <button asp-page-handler="AddCategory" class="i">&#9547;</button>
+                            <input type="text" class="inputtext" name="cname" placeholder="New Category" >
+                        </form>
+                    </div>
+                </div>
+            }
+          </div>
     </div>
 </header>
+
+
+<div class="bigwindow">
+<div class="mainlist">
+        <div class="columnname">
+              <span>@Model.CategoriesList.First(c => c.Id == Model.categoryId).CategoryName</span>
+              <a class="info" asp-page="/Category" asp-route-info="true" asp-route-cid="@Model.categoryId">&#8505;</a>
+        </div>
+        <div class="listlines @((Model.showDetails || Model.showCategoryInfo ) ? "" : "fullview")">
+            <div class="add">
+                <div class="textline">
+                    <form method="post">
+                        <input type="hidden" name="cid" value="@Model.categoryId"/>
+                        <button asp-page-handler="Add" class="i">&#9547;</button>
+                        <input type="text" class="inputtext" name="taskname" placeholder="Enter task name" >
+                    </form>
+                </div>
+            </div>
+            @foreach (var item in Model.CategoryTaskList) {
+                <div class="row @(item.IsDone ? "completed" : "")">
+                    <form method="post">
+                        <input type="hidden" name="upd" value="d"/>
+                        <input type="hidden" name="id" value="@item.Id"/>
+                        <input type="hidden" name="cid" value="@Model.categoryId"/>
+                    <button asp-page-handler="Update" class="done">
+                                <span class="circle @(item.IsDone ? "checkmark" : "")">
+                                @if(item.IsDone){
+                                <p>&#10003;</p>
+                                }
+                                </span>
+                        </button>
+                    </form>
+                    <a asp-page="/Category" asp-route-id="@item.Id" asp-route-cid="@Model.categoryId">@item.TaskName</a>
+                    <form method="post">
+                        <input type="hidden" name="upd" value="s"/>
+                        <input type="hidden" name="id" value="@item.Id"/>
+                        <input type="hidden" name="cid" value="@Model.categoryId"/>
+                    <button  asp-page-handler="Update" class="starbutton">
+                                <span class="circle star @(item.IsUrgent ? "urgent" : "")"></span>
+                            </button>
+                    </form>
+                </div>
+            }
+        </div>
+        @if(Model.showDetails)
+        {
+            <div class="details">
+
+                <div class="row @(Model.CategoryTaskList.First(t => t.Id == Model.DetailsId).IsDone ? "completed" : "")">
+                    <form method="post">
+                        <input type="hidden" name="upd" value="d"/>
+                        <input type="hidden" name="id" value="@Model.DetailsId"/>
+                        <input type="hidden" name="cid" value="@Model.categoryId"/>
+                        <button asp-page-handler="UpdateDetails"  class="done">
+                                <span class="circle @(Model.CategoryTaskList.First(t => t.Id == Model.DetailsId).IsDone ? "checkmark" : "")">
+                                @if(Model.CategoryTaskList.First(t => t.Id == Model.DetailsId).IsDone){
+                                <p>&#10003;</p>
+                                }
+                                </span>
+                        </button>
+                    </form>
+                    <a>@(Model.CategoryTaskList.First(t => t.Id == Model.DetailsId).TaskName)</a>
+                    <form method="post">
+                        <input type="hidden" name="upd" value="s"/>
+                        <input type="hidden" name="id" value="@Model.DetailsId"/>
+                        <input type="hidden" name="cid" value="@Model.categoryId"/>
+                        <button  asp-page-handler="UpdateDetails" class="starbutton">
+                                <span class="circle star @(Model.CategoryTaskList.First(t => t.Id == Model.DetailsId).IsUrgent ? "urgent" : "")"></span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="row">
+                    <div class="textline">
+                        <form method="post">
+                            <input type="hidden" name="id" value="@Model.DetailsId"/>
+                            <input type="text" class="inputtext" name="newtname" value="@(Model.CategoryTaskList.First(t => t.Id == Model.DetailsId).TaskName)" >
+                            <input type="hidden" name="cid" value="@Model.categoryId"/>
+                            <button asp-page-handler="ChangeTaskName" class="savebutton">Save</button>
+                        </form>
+                    </div>
+                </div>
+                @*<div class="ditattributes">
+
+                </div>*@
+
+                <div class="columnname bottom">
+                    <a class="l" asp-page="/Category" asp-route-id="" asp-route-cid="@Model.categoryId">&#8677;</a>
+                    <a asp-page="/Category" asp-route-id="@(Model.CategoryTaskList.TakeWhile(t => t.Id != Model.DetailsId).DefaultIfEmpty(Model.CategoryTaskList[Model.CategoryTaskList.Count - 1]).LastOrDefault().Id)" asp-route-cid="@Model.categoryId">&#8896;</a>
+                    <a asp-page="/Category" asp-route-id="@(Model.CategoryTaskList.SkipWhile(t => t.Id != Model.DetailsId).Skip(1).DefaultIfEmpty(Model.CategoryTaskList[0]).FirstOrDefault().Id)" asp-route-cid="@Model.categoryId">&#8897;</a>
+                    
+                    <form method="post">
+                            <input type="hidden" name="id" value="@Model.DetailsId"/>
+                            <input type="hidden" name="cid" value="@Model.categoryId"/>
+                            <button asp-page-handler="DeleteTask" class="trash">&#128465;</button>
+                    </form>
+                </div>
+
+
+            </div>
+        }
+
+
+        @if(Model.showCategoryInfo)
+        {
+            <div class="details">
+                <div class="columnname">
+                </div>
+                <div class="row">
+                    <div class="textline">
+                        <form method="post">
+                            <input type="text" class="inputtext" name="newcname" value="@(Model.CategoriesList.First(c => c.Id == Model.categoryId).CategoryName)" >
+                            <input type="hidden" name="cid" value="@Model.categoryId"/>
+                            <button asp-page-handler="ChangeCategoryName" class="savebutton">Save</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="columnname bottom">
+                    <a class="l" asp-page="/Category" asp-route-info="false" asp-route-pic="@Model.categoryId">&#8677;</a>
+                    
+                    <form method="post">
+                            <input type="hidden" name="cid" value="@Model.categoryId"/>
+                            <button asp-page-handler="DeleteCategory" class="trash">&#128465;</button>
+                    </form>
+                </div>
+            </div>
+        }
+
+
+        <div class="columnname bottom">
+              <span>@Model.CategoryTaskList.Where(t => t.IsDone == false).Count() left</span>
+        </div>
+
+</div>
+
+</div>
