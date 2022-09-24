@@ -104,7 +104,7 @@ namespace ToDoList.Pages
                 };
                 sQLToDoRepository.AddNewProject(newProject);
             }
-            return RedirectToPage("/Inbox");
+            return RedirectToPage("/Inbox", new { nav = 1 });
         }
 
         public IActionResult OnPostAddCategory()
@@ -118,7 +118,7 @@ namespace ToDoList.Pages
                 };
                 sQLToDoRepository.AddNewCategory(newCategory);
             }
-            return RedirectToPage("/Inbox");
+            return RedirectToPage("/Inbox", new { nav = 2 });
         }
 
         public IActionResult OnPostChangeTaskName()

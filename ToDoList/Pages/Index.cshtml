@@ -1,16 +1,5 @@
 ﻿@page
 @model ToDoList.Pages.IndexModel
-@{
-    //ViewData["Title"] = "Details";
-    //bool navc = false;
-    //bool navp = false;
-
-    //void showRightNavP()
-    //{
-    //    navp = true;
-    //    navc = false;
-    //}
-}
 
 <header>
     <div class="navbar">
@@ -18,13 +7,11 @@
               <a asp-page="/Index" class="chosen">Priority</a>
               <a asp-page="/Inbox">Inbox</a>
               <a asp-page="/Index" asp-route-nav="1">Projects</a>
-              @*<a role="button" asp-page="/Index" action="@showRightNavP">Projects</a>*@
               <a asp-page="/Index" asp-route-nav="2">Categories</a>
-              @*<a asp-page="/Index" asp-route-nav="2">Categories</a>*@
               @*<a>Calendar</a>*@
           </div>
           <div class="rightnavbar">
-            @*@if (navp)*@
+            
             @if (Model.wantProjects)
             {
                 <div class="columnname nav">

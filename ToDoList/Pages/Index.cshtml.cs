@@ -113,7 +113,7 @@ namespace ToDoList.Pages
                 };
                 sQLToDoRepository.AddNewProject(newProject);
             }
-            return RedirectToPage("/Index");
+            return RedirectToPage("/Index", new { nav = 1 });
         }
 
         public IActionResult OnPostAddCategory()
@@ -127,7 +127,7 @@ namespace ToDoList.Pages
                 };
                 sQLToDoRepository.AddNewCategory(newCategory);
             }
-            return RedirectToPage("/Index");
+            return RedirectToPage("/Index", new { nav = 2 });
         }
 
         public IActionResult OnPostChangeTaskName()

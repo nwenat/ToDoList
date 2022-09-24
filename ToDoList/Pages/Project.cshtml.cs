@@ -117,7 +117,7 @@ namespace ToDoList.Pages
                 };
                 sQLToDoRepository.AddNewProject(newProject);
             }
-            return RedirectToPage("/Project", new { pid = Request.Form["pid"] });
+            return RedirectToPage("/Project", new { pid = Request.Form["pid"], nav = 1 });
         }
 
         public IActionResult OnPostAddCategory()
@@ -131,7 +131,7 @@ namespace ToDoList.Pages
                 };
                 sQLToDoRepository.AddNewCategory(newCategory);
             }
-            return RedirectToPage("/Project", new { pid = Request.Form["pid"] });
+            return RedirectToPage("/Project", new { pid = Request.Form["pid"], nav = 2 });
         }
 
         public IActionResult OnPostChangeTaskName()

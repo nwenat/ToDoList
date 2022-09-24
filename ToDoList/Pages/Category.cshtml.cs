@@ -87,10 +87,8 @@ namespace ToDoList.Pages
             return RedirectToPage("/Category", new { id = Request.Form["id"], cid = Request.Form["cid"] });
         }
 
-        /// NAPRAWIC !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         public IActionResult OnPostAdd()
         {
-            var ategories = new List<Category> { sQLToDoRepository.GetCategoryInfo(Int32.Parse(Request.Form["cid"])) };
             if (Request.Form["taskname"] != "")
             {
                 var newToDo = new ToDo
@@ -116,7 +114,7 @@ namespace ToDoList.Pages
                 };
                 sQLToDoRepository.AddNewProject(newProject);
             }
-            return RedirectToPage("/Category", new { cid = Request.Form["cid"] });
+            return RedirectToPage("/Category", new { cid = Request.Form["cid"], nav = 1 });
         }
 
         public IActionResult OnPostAddCategory()
@@ -130,7 +128,7 @@ namespace ToDoList.Pages
                 };
                 sQLToDoRepository.AddNewCategory(newCategory);
             }
-            return RedirectToPage("/Category", new { cid = Request.Form["cid"] });
+            return RedirectToPage("/Category", new { cid = Request.Form["cid"], nav = 2 });
         }
 
         public IActionResult OnPostChangeTaskName()

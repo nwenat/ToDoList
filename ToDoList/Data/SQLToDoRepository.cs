@@ -150,7 +150,9 @@ namespace ToDoList.Data
         {
             Category toDelete = _context.Category.Find(id);
 
-            foreach (ToDo taskInCategory in _context.ToDo.Where(t => t.Categories == toDelete).ToList())
+            //List<ToDo> test = _context.ToDo.Where(t => t.Categories.Contains(toDelete)).ToList();
+
+            foreach (ToDo taskInCategory in _context.ToDo.Where(t => t.Categories.Contains(toDelete)).ToList())
             {
                 if ((taskInCategory.Categories != null) && (toDelete != null))
                 {

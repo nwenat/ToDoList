@@ -8,8 +8,8 @@
           <div class="leftnavbar @((Model.wantProjects || Model.wantCategories)? "minnav" : "")">
               <a asp-page="/Index">Priority</a>
               <a asp-page="/Inbox">Inbox</a>
-              <a asp-page="/Category" asp-route-nav="1" asp-route-pid="@Model.categoryId">Projects</a>
-              <a asp-page="/Category" class="chosen" asp-route-nav="2" asp-route-pid="@Model.categoryId">Categories</a>
+              <a asp-page="/Category" asp-route-nav="1" asp-route-cid="@Model.categoryId">Projects</a>
+              <a asp-page="/Category" class="chosen" asp-route-nav="2" asp-route-cid="@Model.categoryId">Categories</a>
           </div>
           <div class="rightnavbar">
             @if (Model.wantProjects)
