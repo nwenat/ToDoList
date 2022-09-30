@@ -2,13 +2,15 @@
 using Microsoft.Extensions.DependencyInjection;
 using ToDoList.Data;
 using ToDoList.Models;
+using System.Configuration;
 
+string connStr = System.Configuration.ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<ToDoListContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ToDoListContext") ?? throw new InvalidOperationException("Connection string 'ToDoListContext' not found.")));
+    options.UseSqlServer(connStr ));
 
 var app = builder.Build();
 

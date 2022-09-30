@@ -20,15 +20,15 @@ namespace ToDoList.Models
                     return;
                 }
 
-                Project p1 = new Project() { ProjectName = "Work" };
-                Project p2 = new Project() { ProjectName = "Home" };
-                Project p3 = new Project() { ProjectName = "Garden" };
+                Project p1 = new Project() { ProjectName = "Work", ProjectColour = "#e2e2e2;" };
+                Project p2 = new Project() { ProjectName = "Home", ProjectColour = "#e2e2e2;" };
+                Project p3 = new Project() { ProjectName = "Garden", ProjectColour = "#e2e2e2;" };
 
                 context.Project.AddRange(p1, p2, p3);
 
-                Category c1 = new Category() { CategoryName = "computer" };
-                Category c2 = new Category() { CategoryName = "in home" };
-                Category c3 = new Category() { CategoryName = "errands" };
+                Category c1 = new Category() { CategoryName = "computer", CategoryColour = "#e2e2e2;" };
+                Category c2 = new Category() { CategoryName = "in home", CategoryColour = "#e2e2e2;" };
+                Category c3 = new Category() { CategoryName = "errands", CategoryColour = "#e2e2e2;" };
 
                 context.Category.AddRange(c1, c2, c3);
 
@@ -64,7 +64,7 @@ namespace ToDoList.Models
                     new ToDo
                     {
                         TaskName = "Meeting with friends",
-                        WhenToDo = new DateTime(2022, 09, 04),
+                        WhenToDo = new DateTime(2022, 10, 04),
                         IsUrgent = false
                     }
                     );
